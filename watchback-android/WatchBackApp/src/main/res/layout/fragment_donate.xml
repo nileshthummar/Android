@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="carouselItem"
+            type="com.watchback2.android.api.CarouselData.Item" />
+
+        <variable
+            name="videoData"
+            type="com.watchback2.android.api.BrightcovePlaylistData.BrightcoveVideo" />
+
+        <variable
+            name="points"
+            type="String" />
+
+        <variable
+            name="rightIconResourceId"
+            type="int" />
+
+    </data>
+
+    <com.watchback2.android.views.WatchBackSwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_vertical"
+        >
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:background="?attr/viewBackground"
+                app:layout_behavior="com.watchback2.android.views.FixAppBarLayoutBehavior">
+
+                <!-- minHeight set to height of actionbar -->
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minHeight="?attr/actionBarSize"
+                    app:titleEnabled="false"
+                    app:contentScrim="?attr/viewBackground"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlwaysCollapsed"
+                    >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/id_redeem_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_collapseMode="parallax"
+                        >
+
+                        <!-- Height calculated & set in code -->
+                        <com.watchback2.android.views.WatchBackImageView
+                            android:id="@+id/id_logobg"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:imageUrl="@{carouselItem.image2}"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:scaleType="topCenterCrop"
+                            tools:src="#F00"
+                            tools:layout_height="250dp"
+                            />
+
+                        <View
+                            android:id="@+id/id_mask_view"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:background="?attr/maskGradient"
+                            app:layout_constraintBottom_toBottomOf="@id/id_logobg"
+                            app:layout_constraintLeft_toLeftOf="@id/id_logobg"
+                            app:layout_constraintRight_toRightOf="@id/id_logobg"
+                            app:layout_constraintTop_toTopOf="@id/id_logobg"
+                            />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/id_video_item_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/id_logobg"
+                            app:layout_constraintBottom_toBottomOf="@id/id_logobg"
+                            >
+
+                            <!-- Used a separate view below for the background as Layouts do not support
+                                tinting the backgrounds... we need to tint the color manually, depending
+                                on the color returned in the API response -->
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/id_background"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:background="@drawable/rounded_bg_donate"
+                                app:videoContainerBgTint="@{carouselItem.fields.txt8}"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+
+                            <RelativeLayout
+                                android:id="@+id/id_video_layout_container"
+                                android:layout_width="135dp"
+                                android:layout_height="76dp"
+                                android:layout_margin="10dp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent">
+
+                                <com.makeramen.roundedimageview.RoundedImageView
+                                    android:id="@+id/id_image"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"
+                                    app:imageUrl="@{videoData.getPoster()}"
+                                    app:riv_corner_radius="2.9dp"
+                                    tools:src="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/ic_play_featured"
+                                    android:layout_centerInParent="true"
+                                    />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/id_duration"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignBottom="@id/id_image"
+                                    android:layout_alignEnd="@id/id_image"
+                                    android:layout_alignRight="@id/id_image"
+                                    android:layout_margin="7dp"
+                                    android:background="@drawable/rounded_bg"
+                                    android:gravity="center"
+                                    android:maxLines="1"
+                                    android:paddingBottom="3dp"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="3dp"
+                                    android:textSize="12sp"
+                                    android:visibility="@{safeUnbox(videoData.getDuration()) > 0 ? View.VISIBLE : View.GONE, default=gone}"
+                                    app:videoDuration="@{safeUnbox(videoData.getDuration())}"
+                                    app:backgroundTint="?attr/colorPrimaryDark"
+                                    tools:backgroundTint="?attr/colorPrimaryDark"
+                                    app:fontFamily="@font/sf_pro_text_medium"
+                                    tools:fontFamily="@font/sf_pro_text_medium"
+                                    tools:text="21:08" />
+
+                            </RelativeLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/id_name"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                app:layout_constraintLeft_toRightOf="@id/id_video_layout_container"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:maxLines="4"
+                                android:ellipsize="end"
+                                android:gravity="center_vertical"
+                                android:text="@{carouselItem.fields.txt4}"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/sf_pro_display_medium"
+                                tools:fontFamily="@font/sf_pro_display_medium"
+                                tools:text="You could help open doors for America's youth. You could help open doors for America's youth." />
+
+                            <!-- Shadow values: In case we want to add it back:
+                                android:shadowDx="0"
+                                android:shadowDy="2"
+                                android:shadowRadius="9"
+                                android:shadowColor="@color/black"
+                            -->
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/id_logo"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:padding="10dp"
+                            android:layout_marginLeft="63dp"
+                            android:layout_marginRight="63dp"
+                            android:layout_marginTop="39dp"
+                            android:scaleType="centerInside"
+                            app:imageUrl="@{carouselItem.image}"
+                            app:layout_constraintBottom_toTopOf="@id/id_video_item_container"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintVertical_weight="1"
+                            tools:src="@color/steel"
+                            tools:layout_height="100dp"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        app:layout_collapseMode="pin"
+                        app:contentInsetStartWithNavigation="0dp"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetStart="0dp"
+                        android:padding="0dp"
+                        app:elevation="0dp"
+                        >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/id_header_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/id_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minHeight="?attr/actionBarSize"
+                                android:singleLine="true"
+                                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                                android:textSize="19.2sp"
+                                android:gravity="center"
+                                android:text="@{carouselItem.fields.txt1}"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                tools:text="Donate"
+                                />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.appcompat.widget.Toolbar>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                android:layout_gravity="fill_vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/id_visit_page"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_corner"
+                        android:gravity="center"
+                        android:paddingLeft="18dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="9dp"
+                        android:paddingBottom="9dp"
+                        android:text="@{carouselItem.fields.txt9}"
+                        app:onClickUrl="@{carouselItem.fields.txt10}"
+                        app:pageTitle="@{@string/donate}"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance_BrandonMedium"
+                        android:textSize="12sp"
+                        android:layout_marginTop="18.2dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:drawablePadding="7dp"
+                        app:vectorDrawableRight="@{rightIconResourceId}"
+                        app:backgroundTint="?attr/darkButtonBackground"
+                        tools:backgroundTint="?attr/darkButtonBackground"
+                        tools:text="visit xyz.org"
+                        tools:drawableRight="@drawable/ic_right_arrow"
+                        tools:ignore="RtlHardcoded" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/id_points"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:layout_margin="21dp"
+                        android:gravity="center"
+                        android:lineSpacingExtra="1.9sp"
+                        android:text="@{points}"
+                        android:textAppearance="@style/TextAppearance_BrandonMedium"
+                        android:textSize="17sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/id_visit_page"
+                        tools:text="You have 10,405 Points to use towards a gift card!"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/id_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:gravity="center"
+                        android:lineSpacingExtra="1.9sp"
+                        android:text="@{carouselItem.fields.txt2}"
+                        android:textSize="12.5sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/id_points"
+                        app:fontFamily="@font/sf_pro_text_regular"
+                        tools:fontFamily="@font/sf_pro_text_regular"
+                        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/id_redeem"
+                        android:layout_width="match_parent"
+                        android:layout_height="52.8dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginRight="21dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/rounded_corner"
+                        android:gravity="center"
+                        android:text="@{carouselItem.fields.txt12}"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance_BrandonBold"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:backgroundTint="@color/colorAccent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/id_description"
+                        tools:backgroundTint="@color/colorAccent"
+                        tools:text="Visit WatchBack.com"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/id_learn_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="52.8dp"
+                        android:gravity="center"
+                        android:text="@{carouselItem.fields.txt5}"
+                        android:textSize="12sp"
+                        android:textColor="@color/steel"
+                        app:onClickUrl="@{carouselItem.fields.txt6}"
+                        app:pageTitle="@{@string/donate}"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/id_redeem"
+                        android:textAppearance="@style/TextAppearance_BrandonMedium"
+                        tools:ignore="SmallSp"
+                        tools:text="Learn More" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <ProgressBar
+                android:id="@+id/id_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </com.watchback2.android.views.WatchBackSwipeRefreshLayout>
+
+</layout>

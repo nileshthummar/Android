@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.SignupViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/id_scroller"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/id_signup_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/id_back_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:minHeight="?attr/actionBarSize"
+                    android:onClick="@{viewModel::handleBackClick}"
+                    android:padding="15dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/id_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/id_title"
+                    app:srcCompat="@drawable/back_btn"
+                    app:tint="?android:attr/textColor" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:lineSpacingExtra="3.9sp"
+                    android:minHeight="?attr/actionBarSize"
+                    android:singleLine="true"
+                    android:text="@string/sign_up_email"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance_BrandonMedium"
+                    android:textSize="17.3sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/id_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="21dp"
+                    android:afterTextChanged="@{viewModel::handleEmailTextChanged}"
+                    android:hint="@string/email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:nextFocusForward="@+id/id_password"
+                    android:paddingLeft="12dp"
+                    android:singleLine="true"
+                    android:text="@={viewModel.email}"
+                    android:textAppearance="@style/TextAppearance_BrandonMedium"
+                    android:textColor="@{viewModel.emailTextColor}"
+                    android:textColorHint="@{viewModel.emailTextColor}"
+                    android:textSize="15.4sp"
+                    android:theme="@style/LoginSignupEditTextTheme"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_title"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/id_password_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="21dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_email"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/white">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/id_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:afterTextChanged="@{viewModel::handlePasswordTextChanged}"
+                        android:hint="@string/choose_a_password"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:nextFocusForward="@+id/id_password_msg"
+                        android:paddingLeft="12dp"
+                        android:singleLine="true"
+                        android:text="@={viewModel.password}"
+                        android:textAppearance="@style/TextAppearance_BrandonMedium"
+                        android:textColor="@{viewModel.passwordTextColor}"
+                        android:textColorHint="@{viewModel.passwordTextColor}"
+                        android:textSize="15.4sp"
+                        android:theme="@style/LoginSignupEditTextTheme"
+                        tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_password_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="22dp"
+                    android:gravity="center"
+                    android:text="@string/password_requirements"
+                    android:textColor="@{viewModel.highlightPasswordError ? @color/error_text : @color/steel}"
+                    android:textSize="11sp"
+                    android:visibility="@{viewModel.password.length() > 0 ? View.VISIBLE : View.GONE}"
+                    app:fontFamily="@font/sf_pro_text_medium"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_password_container"
+                    tools:fontFamily="@font/sf_pro_txt_med"
+                    tools:ignore="SmallSp"
+                    tools:textColor="@color/steel"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/id_password_repeat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="21dp"
+                    android:afterTextChanged="@{viewModel::handlePasswordConfirmationTextChanged}"
+                    android:hint="@string/repeat_password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:paddingLeft="12dp"
+                    android:singleLine="true"
+                    android:text="@={viewModel.passwordConfirm}"
+                    android:textAppearance="@style/TextAppearance_BrandonMedium"
+                    android:textColor="@{viewModel.passwordConfirmationTextColor}"
+                    android:textColorHint="@{viewModel.passwordConfirmationTextColor}"
+                    android:textSize="15.4sp"
+                    android:theme="@style/LoginSignupEditTextTheme"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_password_msg"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_error_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="?android:attr/windowBackground"
+                    android:gravity="end"
+                    android:text="@string/passwords_do_not_match"
+                    android:textColor="@color/error_text"
+                    android:textSize="11sp"
+                    android:visibility="@{viewModel.visibleErrorText ? View.VISIBLE : View.GONE}"
+                    app:fontFamily="@font/sf_pro_text_bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/id_password_repeat"
+                    app:layout_constraintRight_toRightOf="parent"
+                    tools:fontFamily="@font/sf_pro_txt_bld"
+                    tools:ignore="SmallSp"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/id_dob"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginRight="3dp"
+                    android:afterTextChanged="@{viewModel::handleDoBTextChanged}"
+                    android:drawablePadding="3dp"
+                    android:editable="false"
+                    android:hint="@string/date_of_birth"
+                    android:onClick="@{viewModel::handleDobClick}"
+                    android:singleLine="true"
+                    android:text="@{viewModel.doBText}"
+                    android:textAppearance="@style/TextAppearance_BrandonMedium"
+                    android:textColor="@{viewModel.doBTextColor}"
+                    android:textColorHint="@{viewModel.doBTextColor}"
+                    android:textSize="15.4sp"
+                    android:theme="@style/LoginSignupEditTextSpinnerTheme"
+                    app:inputType="@{@string/spinner}"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/id_gender"
+                    app:layout_constraintTop_toBottomOf="@id/id_password_repeat"
+                    app:tintCompoundDrawables="@{true}"
+                    app:vectorDrawableRight="@{viewModel.dropDownIconResourceId}"
+                    tools:drawableRight="@drawable/ic_arrow_drop_down_white"
+                    tools:ignore="RtlHardcoded" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/id_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="21dp"
+                    android:afterTextChanged="@{viewModel::handleGenderChanged}"
+                    android:drawablePadding="3dp"
+                    android:editable="false"
+                    android:hint="@string/gender"
+                    android:onClick="@{viewModel::handleGenderClick}"
+                    android:paddingLeft="12dp"
+                    android:singleLine="true"
+                    android:text="@{viewModel.genderText}"
+                    android:textAppearance="@style/TextAppearance_BrandonMedium"
+                    android:textColor="@{viewModel.genderTextColor}"
+                    android:textColorHint="@{viewModel.genderTextColor}"
+                    android:textSize="15.4sp"
+                    android:theme="@style/LoginSignupEditTextSpinnerTheme"
+                    app:inputType="@{@string/spinner}"
+                    app:layout_constraintBaseline_toBaselineOf="@id/id_dob"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@id/id_dob"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:tintCompoundDrawables="@{true}"
+                    app:vectorDrawableRight="@{viewModel.dropDownIconResourceId}"
+                    tools:drawableRight="@drawable/ic_arrow_drop_down_white"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/id_terms_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:checked="false"
+                    app:layout_constraintLeft_toLeftOf="@id/id_dob"
+                    app:layout_constraintRight_toLeftOf="@+id/id_tnc_msg"
+                    app:layout_constraintTop_toTopOf="@+id/id_tnc_msg"
+                    tools:checked="true"
+                    tools:ignore="RtlHardcoded" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_tnc_msg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="21dp"
+                    android:gravity="left"
+                    android:lineSpacingExtra="6.5sp"
+                    android:textSize="12.5sp"
+                    app:fontFamily="@font/sf_pro_text_regular"
+                    app:htmlText="@{@string/usage_terms_message}"
+                    app:layout_constraintLeft_toRightOf="@id/id_terms_check"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_dob"
+                    tools:fontFamily="@font/sf_pro_text_regular"
+                    tools:ignore="RtlHardcoded"
+                    tools:text="@string/usage_terms_message" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/id_signup_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="21dp"
+                    android:background="@drawable/rounded_corner"
+                    android:gravity="center"
+                    android:onClick="@{viewModel::handleSignUpClick}"
+                    android:text="@string/register_an_account"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance_BrandonBold"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:backgroundTint="@color/colorAccent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_tnc_msg"
+                    tools:backgroundTint="@color/colorAccent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="21dp"
+                    android:gravity="center"
+                    android:onClick="@{viewModel::handleLoginClick}"
+                    android:paddingBottom="30dp"
+                    android:textSize="12.5sp"
+                    app:fontFamily="@font/sf_pro_text_regular"
+                    app:htmlText="@{@string/account_existing_msg}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_signup_button"
+                    tools:fontFamily="@font/sf_pro_text_regular"
+                    tools:text="@string/account_existing_msg" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/mobile_number_layout"
+                layout="@layout/layout_enter_mobile_number"
+                bind:viewModel="@{viewModel}" />
+
+        </FrameLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Search, should appear as action button -->
+    <item
+        android:id="@+id/action_search"
+        android:title="@string/search_videos"
+        app:actionLayout="@layout/search_bar"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+
+</menu>

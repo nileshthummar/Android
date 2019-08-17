@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.watchback2.android.models.movietickets.VideoHistoryModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/id_iv_history_icon"
+            android:layout_width="@dimen/home_video_list_small_item_width"
+            android:layout_height="@dimen/home_video_list_small_item_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{data.thumbnailUrl}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="2.9dp" />
+
+        <View
+            android:id="@+id/id_divider_history_item"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="8dp"
+            android:background="@color/ash"
+            app:layout_constraintTop_toBottomOf="@+id/id_iv_history_icon" />
+
+        <TextView
+            android:id="@+id/id_tv_episode_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="start"
+            android:text="@{data.title}"
+            android:textAppearance="@style/TextAppearance_BrandonMedium"
+            android:textSize="14sp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/id_btn_more_info"
+            app:layout_constraintLeft_toRightOf="@+id/id_iv_history_icon"
+            app:layout_constraintTop_toTopOf="@+id/id_iv_history_icon"
+            tools:text="S3, Ep6 – USA Network" />
+
+        <!--<TextView
+            android:id="@+id/id_tv_episode_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:alpha=".5"
+            android:gravity="start"
+            android:text=""
+            android:textAppearance="@style/TextAppearance_BrandonBold"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/id_btn_more_info"
+            app:layout_constraintStart_toStartOf="@+id/id_tv_episode_title"
+            app:layout_constraintTop_toBottomOf="@+id/id_tv_episode_title"
+            tools:text="Watched on 3/11/2019" />-->
+
+        <Button
+            android:id="@+id/id_btn_more_info"
+            android:layout_width="0dp"
+            android:layout_height="28.8dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/rounded_bg"
+            app:backgroundTint="@color/colorAccent"
+            android:contentDescription="@string/request_more_info"
+            android:gravity="center"
+            android:lineSpacingExtra="-0.27dp"
+            android:onClick="@{data::onShowDetailsClick}"
+            android:text="@{data.buttontext}"
+            android:textAppearance="@style/TextAppearance_BrandonBold"
+            android:textColor="@color/white"
+            android:textSize="12.2sp"
+            android:visibility="@{data.buttonVisibility}"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:onClickUrl="@{data.redirectUrl}"
+            app:layout_constraintBottom_toBottomOf="@+id/id_iv_history_icon"
+            app:layout_constraintLeft_toRightOf="@+id/id_iv_history_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="@string/request_more_info" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

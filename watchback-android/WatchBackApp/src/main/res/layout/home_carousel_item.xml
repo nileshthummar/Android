@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="com.watchback2.android.utils.AppUtility" />
+
+        <variable
+            name="videoData"
+            type="com.watchback2.android.api.BrightcovePlaylistData.BrightcoveVideo" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/video_carousel_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="12dp"
+        tools:ignore="RtlHardcoded">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_title"
+            style="@style/WideLetterSpacing_0_08"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="13.5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="13.5dp"
+            android:layout_weight="1"
+            android:lineSpacingExtra="2sp"
+            android:singleLine="true"
+            android:text="@{videoData.parentListTitle}"
+            android:textAllCaps="true"
+            android:textAppearance="@style/RobotoRegular"
+            android:textSize="@dimen/title_height_home"
+            android:visibility="@{videoData.firstVideo &amp;&amp; videoData.parentListTitle.length > 0 ? View.VISIBLE : View.GONE}"
+            tools:text="recommended for you"
+            tools:textSize="@dimen/title_height_channels"
+            tools:visibility="visible" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Padding of 3dp is set from the BindingAdapter only if the gold/white-border
+            is to be shown, so that the border(as background) is visible" -->
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_carousel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{videoData.getFeaturedVideoPoster()}"
+                app:riv_corner_radius="5.7dp"
+                app:goldBorderEnabled="@{videoData.getHasGoldBorder()}"
+                app:isTypeUrl="@{videoData.isUrl()}"
+                tools:background="@drawable/gold_frame_updated" />
+
+            <!--<androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                android:layout_alignBottom="@id/img_carousel"
+                android:layout_alignEnd="@id/img_carousel"
+                android:layout_alignRight="@id/img_carousel"
+                android:layout_margin="9dp"
+                android:background="@drawable/rounded_bg"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="12sp"
+                android:visibility="@{safeUnbox(videoData.getDuration()) > 0 ? View.VISIBLE : View.GONE, default=gone}"
+                app:fontFamily="@font/sf_pro_text_medium"
+                app:videoDuration="@{safeUnbox(videoData.getDuration())}"
+                app:backgroundTint="?attr/colorPrimaryDark"
+                tools:backgroundTint="?attr/colorPrimaryDark"
+                tools:fontFamily="@font/sf_pro_text_medium"
+                tools:text="21:08"
+                tools:visibility="visible" />
+-->
+           <!-- <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/featured"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@id/duration"
+                android:layout_alignStart="@id/img_carousel"
+                android:layout_alignLeft="@id/img_carousel"
+                android:layout_marginLeft="9dp"
+                android:adjustViewBounds="true"
+                android:padding="0dp"
+                android:visibility="@{videoData.hasValidBottomLeftIcon() ? View.VISIBLE : View.GONE}"
+                app:imageUrl="@{videoData.bottomLeftIconUrl}"
+                tools:visibility="visible"
+                tools:srcCompat="@drawable/ic_featured_tag"
+                tools:ignore="RtlHardcoded" />
+-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_watched"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                android:layout_alignTop="@id/img_carousel"
+                android:layout_alignEnd="@id/img_carousel"
+                android:layout_alignRight="@id/img_carousel"
+                android:layout_margin="9dp"
+                android:background="@drawable/rounded_bg"
+                android:gravity="center"
+                android:maxLines="1"
+                android:includeFontPadding="false"
+                android:paddingBottom="3dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="3dp"
+                android:textSize="12sp"
+                android:text="@string/watched"
+                android:visibility="gone"
+                app:textAllCaps="true"
+                app:fontFamily="@font/sf_pro_text_medium"
+                app:backgroundTint="?attr/colorPrimaryDark"
+                tools:backgroundTint="?attr/colorPrimaryDark"
+                tools:fontFamily="@font/sf_pro_text_medium"
+                tools:visibility="visible"
+                tools:ignore="SmallSp"/>
+
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/channel_image"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:visibility="@{!TextUtils.isEmpty(videoData.imageUrl) ? View.VISIBLE : View.GONE}"
+                app:imageUrl="@{videoData.imageUrl}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="2.25dp"
+                tools:src="#F00"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name_carousel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@{videoData.getName()}"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginRight="3.9dp"
+                android:layout_marginEnd="3.9dp"
+                app:layout_goneMarginLeft="3dp"
+                app:layout_goneMarginStart="3dp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                app:layout_constraintLeft_toRightOf="@id/channel_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textSize="14sp"
+                app:fontFamily="@font/sf_pro_display_medium"
+                tools:fontFamily="@font/sf_pro_display_medium"
+                tools:text="Sister-Zoned - Foursome: Episode 1 blah blah...Second Line!... Sister-Zoned - Foursome: Episode 1 blah blah...Second Line!" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_channel_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@id/name_carousel"
+                app:layout_constraintTop_toBottomOf="@id/name_carousel"
+                android:gravity="start"
+                android:text="@{videoData.getProviderName()}"
+                android:textColor="@color/steel"
+                android:visibility="@{!TextUtils.isEmpty(videoData.getProviderName()) ? View.VISIBLE : View.GONE}"
+                android:textSize="12sp"
+                app:fontFamily="@font/sf_pro_display_regular"
+                tools:fontFamily="@font/sf_pro_display_regular"
+                tools:text="Ipsum dolor sit consctetuia blah blah2 Ipsum dolor sit consctetuia blah blah2...Ipsum dolor sit ....blah blah blah...blah blah blah...this is the third line of featured item's description"
+                tools:ignore="SmallSp"
+                tools:visibility="visible"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

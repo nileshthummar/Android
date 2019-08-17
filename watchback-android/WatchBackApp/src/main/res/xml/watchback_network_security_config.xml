@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+
+    <!-- Allow HTTP for specific domains, -allow certain domains to be permitted to use clear HTTP requests:
+     https://support.brightcove.com/android-pie-support-native-sdk-android#HTTP_for_specific_domains -->
+    <base-config cleartextTrafficPermitted="true" />
+
+</network-security-config>

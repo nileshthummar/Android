@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="settingsContainerNavigator"
+            type="com.watchback2.android.navigators.ISettingsContainerNavigator" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/header_top_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/id_app_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            app:srcCompat="@drawable/ic_wb_home_icon" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/id_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:visibility="gone"
+            android:contentDescription="@string/click_to_open_settings"
+            android:onClick="@{settingsContainerNavigator::handleSettingsClick}"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_settings" />
+
+    </RelativeLayout>
+
+</layout>

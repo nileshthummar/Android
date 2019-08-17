@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:background="#80000000"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="30dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:background="@drawable/rounded_corner"
+            app:backgroundTint="#e9e9e9"
+            tools:backgroundTint="#e9e9e9"
+            android:orientation="vertical"
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Welcome Back!"
+                android:textColor="#000000"
+                android:textSize="21sp"
+                android:layout_marginTop="12dp"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                tools:ignore="HardcodedText" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                android:text="There is a new version of WatchBack available in the Play Store."
+                android:textColor="#000000"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:paddingLeft="9dp"
+                android:paddingRight="9dp"
+                app:fontFamily="@font/sf_pro_text_regular"
+                tools:fontFamily="@font/sf_pro_text_regular"
+                tools:ignore="HardcodedText" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Improve your experience by downloading the latest version now. Just tap 'Update' below!"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:fontFamily="@font/sf_pro_text_regular"
+                tools:fontFamily="@font/sf_pro_text_regular"
+                tools:ignore="HardcodedText" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonUPdate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="UPDATE"
+                android:background="@drawable/bottom_left_right_rounded_corner_green"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="20dp"
+                android:textSize="13.4sp"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/closeBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="5dp"
+            android:layout_marginRight="5dp"
+            android:text="X"
+            android:textColor="@color/steel"
+            android:textSize="21sp"
+            android:textAppearance="@style/TextAppearance_BrandonMedium"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+    </FrameLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

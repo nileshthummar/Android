@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.WalkthroughViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/id_splash_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.watchback2.android.views.WatchBackImageView
+            android:id="@+id/id_bg_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:scaleType="topCenterCrop"
+            app:imageUrl="@{viewModel.backgroundURl}"
+            tools:srcCompat="@drawable/watchback_bg_cover"
+            android:visibility="@{viewModel.backgroundVisibility}"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/skip_login"
+            android:textSize="12.5sp"
+            android:onClick="@{viewModel::handleSkipClick}"
+            android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="15dp"
+            app:fontFamily="@font/sf_pro_text_bold"
+            tools:fontFamily="@font/sf_pro_text_bold"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="11.5sp"
+            android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/id_skip"
+            android:layout_marginBottom="10dp"
+            app:fontFamily="@font/sf_pro_text_regular"
+            android:text="@string/or"
+            android:textColor="@color/steel"
+            tools:fontFamily="@font/sf_pro_text_regular"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_log_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="12.5sp"
+            android:onClick="@{viewModel::handleLogInClick}"
+            android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/id_separator"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:fontFamily="@font/sf_pro_text_regular"
+            app:htmlText="@{@string/account_existing_msg}"
+            tools:text="@string/account_existing_msg"
+            tools:fontFamily="@font/sf_pro_text_regular"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/id_signup"
+            android:layout_width="match_parent"
+            android:layout_height="52.8dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/rounded_corner"
+            android:text="@string/sign_up_email"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance_BrandonBold"
+            android:textColor="@color/white"
+            android:textSize="13.4sp"
+            android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+            android:onClick="@{viewModel::handleSignUpClick}"
+            app:backgroundTint="@color/colorAccent"
+            app:layout_constraintBottom_toTopOf="@id/id_log_in"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:backgroundTint="@color/colorAccent"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:minLines="2"
+            android:paddingLeft="33dp"
+            android:paddingRight="33dp"
+            android:singleLine="false"
+            android:gravity="center_horizontal|bottom"
+            android:textAllCaps="false"
+            android:includeFontPadding="false"
+            android:textAppearance="@style/TextAppearance_BrandonBold"
+            android:textSize="15sp"
+            android:text="@{viewModel.descriptionTxt}"
+            app:layout_constraintBottom_toTopOf="@id/id_signup"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="Register to personalize your home screen with your interests and brands"
+            android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/id_app_logo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/id_description"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{viewModel.logoURl}"
+            tools:srcCompat="@drawable/ic_splash_logo"
+            android:visibility="@{viewModel.logoVisbility}"
+            tools:visibility="visible" />
+
+
+        <ProgressBar
+            android:id="@+id/id_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

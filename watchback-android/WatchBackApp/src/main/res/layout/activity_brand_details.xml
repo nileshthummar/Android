@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.BrandDetailsViewModel" />
+
+        <variable
+            name="channel"
+            type="com.watchback2.android.models.Channel" />
+
+    </data>
+
+    <com.watchback2.android.views.WatchBackSwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_vertical">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/id_brand_details_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/viewBackground"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_behavior="com.watchback2.android.views.FixAppBarLayoutBehavior">
+                <!-- FixAppBarLayoutBehavior is to fix a bug of RecyclerView, where having
+                 a scrollBehavior set, makes RecyclerView not process click-events
+                 for child elements when it is flinged. See FixAppBarLayoutBehavior for detais -->
+
+                <!-- minHeight set to height of actionbar -->
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minHeight="?attr/actionBarSize"
+                    app:updateCollapsableToolbarLockState="@{viewModel.isEmptyList || viewModel.dataLoading ? false : true}"
+                    app:contentScrim="?attr/viewBackground"
+                    app:titleEnabled="false">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/id_image_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0">
+
+                        <com.watchback2.android.views.WatchBackImageView
+                            android:id="@+id/id_brand_logo_bg"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:imageUrl="@{channel.backgroundImageUrl}"
+                            app:layout_constraintBottom_toBottomOf="@+id/id_brand_info_container"
+                            app:layout_constraintLeft_toLeftOf="@+id/id_brand_info_container"
+                            app:layout_constraintRight_toRightOf="@+id/id_brand_info_container"
+                            app:layout_constraintTop_toTopOf="@+id/id_brand_info_container"
+                            app:scaleType="topCenterCrop"
+                            tools:srcCompat="@drawable/caption_background" />
+
+                        <View
+                            android:id="@+id/id_mask_view"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:background="?attr/maskGradient"
+                            app:layout_constraintBottom_toBottomOf="@id/id_brand_logo_bg"
+                            app:layout_constraintLeft_toLeftOf="@id/id_brand_logo_bg"
+                            app:layout_constraintRight_toRightOf="@id/id_brand_logo_bg"
+                            app:layout_constraintTop_toTopOf="@id/id_brand_logo_bg" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/id_brand_info_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="28.8dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <!--
+                            marginTop required here is 19.2dp, below the title view. However, the
+                            title is inside a separate parent & so we add about 37.8dp of additional
+                            margin as that is approximately where the title view's bottom is from
+                            the top of the screen
+                            -->
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/id_brand_logo"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:layout_marginTop="57dp"
+                                app:imageUrl="@{channel.getBrandDetailsScreenLogo()}"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:src="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/id_brand_description"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="19.2dp"
+                                android:gravity="top|center_horizontal"
+                                android:paddingLeft="16.5dp"
+                                android:paddingRight="16.5dp"
+                                android:text="@{channel.description}"
+                                android:textSize="18sp"
+                                app:fontFamily="@font/sf_pro_text_regular"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/id_brand_logo"
+                                tools:fontFamily="@font/sf_pro_txt_reg"
+                                tools:text="All The Awesomeness. Yolo ipsum dolor sit lorum ipsum ipsum dolor sit lorum ipsum lorum is a consectetur  sit lorum ipsum ipsum dolor sit lorum." />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/id_brand_page"
+                                android:layout_width="wrap_content"
+                                android:layout_height="34.6dp"
+                                android:layout_marginTop="18.2dp"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center"
+                                android:onClick="@{viewModel::onButtonClick}"
+                                android:paddingStart="12dp"
+                                android:paddingLeft="12dp"
+                                android:paddingEnd="10dp"
+                                android:paddingRight="10dp"
+                                android:text="@{channel.buttonText}"
+                                android:textAllCaps="false"
+                                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                                android:textColor="@color/white"
+                                android:textSize="13.4sp"
+                                android:visibility="gone"
+                                app:backgroundTint="@color/brand_button_tint"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/id_brand_description"
+                                tools:backgroundTint="@color/brand_button_tint"
+                                tools:text="Visit Awesomnesstv.com" />
+
+                            <!-- hiding this button as per: https://jira.rhythmone.com/browse/PEWAN-581 -->
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/id_btn_request"
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center"
+                                android:textAllCaps="false"
+                                android:textAppearance="@style/TextAppearance_BrandonBold"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:text="@{viewModel.reqButtonText}"
+                                android:onClick="@{viewModel::onRequestMoreInfoClick}"
+                                android:visibility="gone"
+                                app:backgroundTint="@color/colorAccent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/id_brand_page"
+                                tools:backgroundTint="@color/colorAccent"
+                                tools:text="@string/request_more_info" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/id_btn_favorite"
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginTop="16dp"
+                                android:background="@drawable/rounded_corner"
+                                android:gravity="center"
+                                android:textAllCaps="false"
+                                android:textAppearance="@style/TextAppearance_BrandonBold"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:text="@{viewModel.favoritesButtonText}"
+                                android:onClick="@{viewModel::onAddToMyFavoritesClick}"
+                                android:alpha="@{viewModel.favoritesButtonAlpha}"
+                                app:backgroundTint="@color/colorAccent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/id_btn_request"
+                                tools:backgroundTint="@color/colorAccent"
+                                tools:text="Add to My Favorites" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:padding="0dp"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetStart="0dp"
+                        app:contentInsetStartWithNavigation="0dp"
+                        app:elevation="0dp"
+                        app:layout_collapseMode="pin">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/id_header_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/id_brand_title"
+                                style="@style/WideLetterSpacing_0_08"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:lineSpacingExtra="1.9sp"
+                                android:minHeight="?attr/actionBarSize"
+                                android:singleLine="true"
+                                android:text="@{channel.name}"
+                                android:textAppearance="@style/RobotoRegular"
+                                android:textSize="22sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Awesomeness TV Awesomeness TV Adorama TV: through the Lens" />
+
+                            <!-- Focusable in touch mode is set to true here to prevent the UI from
+                                 jumping to last populated RecyclerView in the UI -->
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/id_back"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@null"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:minHeight="?attr/actionBarSize"
+                                android:onClick="@{viewModel::onBackClick}"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="15dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/back_btn"
+                                app:tint="?android:attr/textColor" />
+
+                            <ImageView
+                                android:id="@+id/id_iv_settings"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:visibility="gone"
+                                android:onClick="@{viewModel::onSettingsClick}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_settings" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.appcompat.widget.Toolbar>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/id_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="fill_vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_sort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawablePadding="6dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textSize="14sp"
+                    android:text="@string/available_on_watchback"
+                    android:visibility="@{!viewModel.isEmptyList ? View.VISIBLE : View.GONE}"
+                    app:fontFamily="@font/sf_pro_text_medium"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:fontFamily="@font/sf_pro_text_medium"
+                    tools:ignore="RtlSymmetry"
+                    tools:text="@string/available_on_watchback" />
+
+                <com.watchback2.android.views.SmoothScrollEnabledRecyclerView
+                    android:id="@+id/id_brand_videos_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:visibility="@{!viewModel.isEmptyList &amp;&amp; !viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+                    app:brandVideoItems="@{viewModel.videosList}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_sort"
+                    app:layout_constraintVertical_weight="1" />
+
+                <!-- Shown only for the first set of videos -->
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/id_progress_bar_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.isEmptyList &amp;&amp; viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_sort"
+                    app:shimmer_base_alpha_dayMode="@{@fraction/opacity_37_5}"
+                    app:shimmer_base_alpha_nightMode="@{@fraction/opacity_60}"
+                    tools:visibility="visible">
+
+                    <include
+                        android:id="@+id/loading_view"
+                        layout="@layout/video_list_loading_views" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ProgressBar
+                android:id="@+id/id_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{!viewModel.isEmptyList &amp;&amp; viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+                tools:visibility="visible" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </com.watchback2.android.views.WatchBackSwipeRefreshLayout>
+
+</layout>

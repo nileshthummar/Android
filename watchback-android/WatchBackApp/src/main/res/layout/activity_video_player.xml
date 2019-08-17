@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <RelativeLayout
+        android:id="@+id/videoplayer_relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/settingsTextItemBackground"
+        android:animateLayoutChanges="true"
+        android:keepScreenOn="true"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="@dimen/video_player_toolbar_height"
+            android:layout_height="@dimen/video_player_toolbar_height"
+            android:background="@android:color/transparent" />
+
+        <!-- Height calculated & set from code assuming the aspect ratio to be 16:9 -->
+        <com.brightcove.player.view.BrightcoveExoPlayerVideoView
+            android:id="@+id/brightcove_video_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/video_player_toolbar_height"
+            android:background="@android:color/black" >
+
+            <com.google.android.exoplayer2.ui.PlayerView android:id="@+id/exo_player_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:controller_layout_id="@layout/exo_custom_controls"
+                android:visibility="gone"/>
+        </com.brightcove.player.view.BrightcoveExoPlayerVideoView>
+
+        <FrameLayout
+            android:id="@+id/play_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/brightcove_video_view"
+            android:layout_alignBottom="@id/brightcove_video_view"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/play_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/play_icon"
+                />
+
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/brightcove_video_view"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/channel_image"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:src="#F00"
+                tools:visibility="visible"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/video_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:gravity="start|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                app:layout_goneMarginLeft="0dp"
+                app:layout_goneMarginStart="0dp"
+                app:layout_constraintLeft_toRightOf="@id/channel_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/channel_name"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:textSize="14sp"
+                app:fontFamily="@font/sf_pro_display_medium"
+                tools:fontFamily="@font/sf_pro_display_medium"
+                tools:text="Sister-Zoned - Foursome: Episode 1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/channel_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1.25dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/steel"
+                android:gravity="start|center_vertical"
+                app:layout_constraintLeft_toLeftOf="@id/video_title"
+                app:layout_constraintTop_toBottomOf="@id/video_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="@id/video_title"
+                android:textSize="12sp"
+                app:fontFamily="@font/sf_pro_display_regular"
+                tools:fontFamily="@font/sf_pro_display_regular"
+                tools:text="Ipsum dolor sit consctetuia blah blah2 Ipsum dolor sit consctetuia blah blah2 "/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.watchback2.android.views.SmoothScrollEnabledRecyclerView
+            android:id="@+id/player_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/titleView"
+            android:background="?attr/viewBackground"
+            android:visibility="gone"
+            android:scrollbars="none" />
+
+        <View
+            android:id="@+id/scrimView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="#99000000"
+            android:layout_alignTop="@id/brightcove_video_view"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/aysw_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/brightcove_video_view"
+            android:layout_alignBottom="@id/brightcove_video_view"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:text="@string/aysw"
+                android:textAppearance="@style/TextAppearance_BrandonBold"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/id_continue"
+                android:layout_width="wrap_content"
+                android:layout_height="39dp"
+                android:layout_marginTop="27.3dp"
+                android:layout_marginBottom="18.3dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@drawable/rounded_corner"
+                android:gravity="center"
+                android:text="@string/continue_watching"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:backgroundTint="@color/steel"
+                tools:backgroundTint="@color/steel"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_exit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:text="@string/exit"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/resume_playing_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/brightcove_video_view"
+            android:layout_alignBottom="@id/brightcove_video_view"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone" >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/id_resume_playing"
+                android:layout_width="wrap_content"
+                android:layout_height="39dp"
+                android:layout_marginBottom="18.3dp"
+                android:paddingLeft="75dp"
+                android:paddingRight="75dp"
+                android:background="@drawable/rounded_corner"
+                android:gravity="center"
+                android:text="@string/resume"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:backgroundTint="@color/steel"
+                tools:backgroundTint="@color/steel"
+                android:textAppearance="@style/RobotoRegular"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_resume_playing_from_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="14.5sp"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:text="@string/start_from_beginning"
+                android:textAppearance="@style/RobotoRegular"
+                />
+
+        </LinearLayout>
+
+        <!-- The minicontroller widget used to control playback on a cast device. -->
+     <!--   <com.google.android.libraries.cast.companionlibrary.widgets.MiniController
+            android:id="@+id/miniControllerPerk"
+            auto_setup="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/shadow7"
+            android:visibility="gone" />
+-->
+        <!--
+         The reason for this view is to show the background color when video is maximized to
+         landscape. Without this, in day-mode, the button isn't visible on dark videos as the center
+         part of the below 'ic_close_round' icon is transparent; & since the background is also dark,
+         it makes it seem as a dark circle (which isn't visible when the video playing is also all
+         dark)
+        -->
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btnClose_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="?attr/settingsTextItemBackground"
+            android:layout_alignLeft="@+id/btnClose"
+            android:layout_alignStart="@+id/btnClose"
+            android:layout_alignTop="@+id/btnClose"
+            android:layout_alignRight="@+id/btnClose"
+            android:layout_alignEnd="@+id/btnClose"
+            android:layout_alignBottom="@+id/btnClose"
+            android:layout_margin="2.5dp"
+            android:padding="10dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="@android:color/transparent"
+            android:layout_alignTop="@id/brightcove_video_view"
+            android:padding="10dp"
+            app:srcCompat="@drawable/ic_close_round"
+            />
+
+        <ProgressBar
+            android:id="@+id/id_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</layout>

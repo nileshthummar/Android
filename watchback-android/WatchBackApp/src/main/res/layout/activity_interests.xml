@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.InterestsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/id_interests_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22.2dp"
+            android:text="@string/what_do_you_love_to_watch"
+            android:textAppearance="@style/TextAppearance_BrandonMedium"
+            android:textSize="19.2sp"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/id_skip_channels"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_skip_channels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::handleCancelButtonClick}"
+            android:text="@string/cancel_channel"
+            android:visibility="@{viewModel.isEditingFromSettings ? View.VISIBLE : View.GONE}"
+            android:textAllCaps="false"
+            android:textColor="@color/steel"
+            android:textSize="16.3sp"
+            app:fontFamily="@font/sf_pro_text_medium"
+            app:layout_constraintBaseline_toBaselineOf="@+id/id_title"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/id_submit_interests"
+            android:layout_width="match_parent"
+            android:layout_height="52.8dp"
+            android:layout_marginBottom="42.2dp"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:alpha="@{viewModel.enableSubmitButton ? @fraction/opacity_100 : @fraction/opacity_30}"
+            android:text="@{viewModel.enableSubmitButton ? (viewModel.isEditingFromSettings ? @string/done : @string/continue_to_home) : @string/choose_3_or_more}"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance_BrandonBold"
+            android:textColor="@color/white"
+            android:textSize="13.4sp"
+            android:enabled="@{viewModel.enableSubmitButton ? true : false}"
+            android:onClick="@{viewModel::handleInterestsSelected}"
+            app:backgroundTint="@color/colorAccent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:backgroundTint="@color/colorAccent"
+            tools:text="@string/continue_to_home"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/id_interests_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="22.2dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_title"
+            app:layout_constraintBottom_toTopOf="@id/id_submit_interests"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintVertical_weight="1"
+            app:interestsItems="@{viewModel.interestsList}"
+            tools:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/id_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

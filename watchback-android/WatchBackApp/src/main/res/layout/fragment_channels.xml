@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.ChannelsFragmentViewModel" />
+
+        <variable
+            name="settingsContainerNavigator"
+            type="com.watchback2.android.navigators.ISettingsContainerNavigator" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Focusable in touch mode is set to true here to prevent the UI from
+             jumping to last populated RecyclerView in the UI -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_title"
+            style="@style/WideLetterSpacing_0_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:lineSpacingExtra="1.9sp"
+            android:minHeight="?attr/actionBarSize"
+            android:singleLine="true"
+            android:text="@string/channels"
+            android:textAppearance="@style/TextAppearance_BrandonMedium"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:visibility="gone"
+            android:onClick="@{settingsContainerNavigator::handleSettingsClick}"
+            app:layout_constraintBottom_toTopOf="@id/swipe_container"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_settings" />
+
+
+        <com.watchback2.android.views.WatchBackSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipe_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_title"
+            app:onLoadStateChange="@{viewModel.dataLoading}">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/id_grp_favorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{viewModel.dataLoading ? View.GONE : viewModel.favListVisibility}"
+                        app:constraint_referenced_ids="id_title_fav,id_channels_list_favorite"
+                        tools:visibility="gone" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/id_title_fav"
+                        style="@style/WideLetterSpacing_0_08"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:alpha=".8"
+                        android:lineSpacingExtra="2sp"
+                        android:singleLine="true"
+                        android:text="MY Favorites"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance_BrandonBold"
+                        android:textSize="13sp"
+                        android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:textSize="13sp"
+                        tools:visibility="gone" />
+
+                    <com.watchback2.android.views.SmoothScrollEnabledRecyclerView
+                        android:id="@+id/id_channels_list_favorite"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:descendantFocusability="afterDescendants"
+                        android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+                        app:channelItemsList="@{viewModel.favList}"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/id_title_fav"
+                        tools:visibility="visible" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/id_title_genre"
+                        style="@style/WideLetterSpacing_0_08"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:alpha=".8"
+                        android:lineSpacingExtra="2sp"
+                        android:singleLine="true"
+                        android:text="Channels"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance_BrandonBold"
+                        android:textSize="13sp"
+                        android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/id_channels_list_favorite"
+                        tools:textSize="13sp"
+                        tools:visibility="gone" />
+
+                    <com.watchback2.android.views.SmoothScrollEnabledRecyclerView
+                        android:id="@+id/id_all_channels_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:descendantFocusability="afterDescendants"
+                        android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+                        app:channelItemsList="@{viewModel.channelItemsList}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/id_title_genre"
+                        tools:visibility="visible" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </com.watchback2.android.views.WatchBackSwipeRefreshLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/id_progress_bar_shimmer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_title"
+            app:shimmer_base_alpha_dayMode="@{@fraction/opacity_37_5}"
+            app:shimmer_base_alpha_nightMode="@{@fraction/opacity_60}"
+            tools:visibility="visible">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:orientation="vertical">
+
+                <include layout="@layout/channel_fragment_loading_view_row" />
+
+                <include layout="@layout/channel_fragment_loading_view_row" />
+
+                <include layout="@layout/channel_fragment_loading_view_row" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

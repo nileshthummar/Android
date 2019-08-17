@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="isTablet">false</bool>
+
+    <!-- Custom attributes for WatchBackImageView -->
+    <declare-styleable name="WatchBackImageView">
+
+        <!-- Controls how the image should be resized or moved to match the size
+             of this ImageView. -->
+        <attr name="scaleType">
+            <enum name="matrix" value="0" />
+            <enum name="fitXY" value="1" />
+            <enum name="fitStart" value="2" />
+            <enum name="fitCenter" value="3" />
+            <enum name="fitEnd" value="4" />
+            <enum name="center" value="5" />
+            <enum name="centerCrop" value="6" />
+            <enum name="centerInside" value="7" />
+            <enum name="topCenterCrop" value="8" />
+            <enum name="fillXTopCenter" value="9" />
+            <enum name="fillYCenter" value="10" />
+            <enum name="fillXCenter" value="11" />
+        </attr>
+
+        <!-- @hide The alpha value (0-255) set on the ImageView's drawable. Equivalent
+             to calling ImageView.setAlpha(int), not the same as View.setAlpha(float). -->
+        <attr name="drawableAlpha" format="integer" />
+
+        <!-- Specifies if the WatchBackImageView dimensions should be a square i.e. height
+             will made same as the width of the WatchBackImageView -->
+        <attr name="squareImageView" format="boolean" />
+
+    </declare-styleable>
+
+    <declare-styleable name="WatchBackTheme">
+
+        <attr name="settingsTextItemBackground" format="color" />
+        <attr name="viewBackground" format="color" />
+        <attr name="viewBackgroundInverse" format="color" />
+        <attr name="separator_color" format="color" />
+        <attr name="darkButtonBackground" format="color" />
+        <attr name="maskGradient" format="reference" />
+        <attr name="switchItemTextColor" format="reference" />
+        <attr name="switchOutline" format="reference" />
+        <attr name="switchSelectorLeft" format="reference" />
+        <attr name="switchSelectorRight" format="reference" />
+        <attr name="customTabIconTint" format="reference" />
+        <attr name="popupBackground" format="reference" />
+
+    </declare-styleable>
+
+</resources>

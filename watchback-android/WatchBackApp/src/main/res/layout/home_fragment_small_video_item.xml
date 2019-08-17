@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.watchback2.android.utils.AppUtility" />
+
+        <variable
+            name="videoData"
+            type="com.watchback2.android.api.BrightcovePlaylistData.BrightcoveVideo" />
+
+        <variable
+            name="isForChannelsList"
+            type="boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/id_video_item_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/id_image"
+            android:layout_width="@dimen/home_video_list_small_item_width"
+            android:layout_height="@dimen/home_video_list_small_item_height"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{videoData.getVideoPoster()}"
+            app:riv_corner_radius="2.9dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_watched"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/id_image"
+            app:layout_constraintRight_toRightOf="@id/id_image"
+            android:layout_margin="7dp"
+            android:background="@drawable/rounded_bg"
+            android:gravity="center"
+            android:maxLines="1"
+            android:includeFontPadding="false"
+            android:paddingBottom="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:textSize="10sp"
+            android:text="@string/watched"
+            android:visibility="@{(videoData.watched || AppUtility.isVideoWatched(videoData)) ? View.VISIBLE : View.GONE}"
+            app:textAllCaps="true"
+            app:fontFamily="@font/sf_pro_text_medium"
+            app:backgroundTint="?attr/colorPrimaryDark"
+            tools:backgroundTint="?attr/colorPrimaryDark"
+            tools:fontFamily="@font/sf_pro_text_medium"
+            tools:visibility="visible"
+            tools:ignore="SmallSp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/id_image"
+            app:layout_constraintRight_toRightOf="@id/id_image"
+            android:layout_margin="7dp"
+            android:background="@drawable/rounded_bg"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingBottom="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:textSize="10sp"
+            android:visibility="@{safeUnbox(videoData.getDuration()) > 0 ? View.VISIBLE : View.GONE, default=gone}"
+            app:fontFamily="@font/sf_pro_text_medium"
+            app:videoDuration="@{safeUnbox(videoData.getDuration())}"
+            app:backgroundTint="?attr/colorPrimaryDark"
+            tools:backgroundTint="?attr/colorPrimaryDark"
+            tools:fontFamily="@font/sf_pro_text_medium"
+            tools:text="21:08"
+            tools:visibility="visible"
+            tools:ignore="SmallSp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_name"
+            android:layout_width="@dimen/home_video_list_small_item_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/id_image"
+            android:gravity="start|top"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:scrollHorizontally="true"
+            android:text="@{videoData.getName()}"
+            android:textSize="14sp"
+            android:textAppearance="@style/RobotoLight"
+            tools:text="Ipsum dolor sit consctetuia blah blah2 Ipsum dolor sit consctetuia" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_channel_name"
+            android:layout_width="@dimen/home_video_list_small_item_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1.2dp"
+            app:layout_constraintTop_toBottomOf="@id/id_name"
+            android:ellipsize="end"
+            android:gravity="start|top"
+            android:singleLine="true"
+            android:text="@{videoData.getCustomFields().getProvider()}"
+            android:textColor="@color/steel"
+            android:visibility="@{isForChannelsList ? View.GONE : View.VISIBLE}"
+            android:textSize="12sp"
+            app:fontFamily="@font/sf_pro_display_regular"
+            tools:fontFamily="@font/sf_pro_display_regular"
+            tools:text="Ipsum dolor sit consctetuia blah blah2"
+            tools:ignore="SmallSp" />
+
+        <!-- The only reason for the below TextView is that... this layout is used as an item-layout
+        for a Horizontal RecyclerView, which itself is an item inside a vertical parent RecyclerView.
+        So, there are cases where in the 'id_name' above would be short & fits in a single line, or,
+        it may go to 2 lines if it is long. Plus, the 'id_channel_name' view moves up/down depending
+        on the 'id_name' content (& it may not be there at all for some videos). ==> This causes the
+        horizontal RecyclerView to jump up/down sometimes when scrolling horizontally, depending on
+        the content. Also, sometimes when recycling the ViewHolders, it doesn't resize the height -so
+        there are cases wherein the 'id_channel_name' simply disappears as the 'id_name' is changed
+        to 2 lines after ViewHolder is recycled, whereas it was previously 1 line.
+        So, our dummy TextView below is used to always fix the height to either 3/2 lines (depending
+        on whether this item isn't/is for a channel list) with no actual content, which prevents
+        both the above issues.
+         -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_dummy_textview"
+            android:layout_width="@dimen/home_video_list_small_item_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/id_image"
+            android:gravity="start|top"
+            android:maxLines="@{isForChannelsList ? @integer/max_lines_2 : @integer/max_lines_3}"
+            android:minLines="@{isForChannelsList ? @integer/max_lines_2 : @integer/max_lines_3}"
+            android:textSize="14sp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

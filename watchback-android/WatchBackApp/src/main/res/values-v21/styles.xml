@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="WideLetterSpacing_0_08">
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+
+    <style name="WideLetterSpacing_0_01">
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="WideLetterSpacing_0_15">
+        <item name="android:letterSpacing">0.15</item>
+    </style>
+
+    <!-- Set to use Roboto-medium i.e. "sans-serif-medium" -was added in Android 5.0 (API-v21) -->
+    <style name="TextAppearance_BrandonMedium">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+</resources>

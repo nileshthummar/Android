@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="imgSrc"
+            type="String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/id_splash_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/id_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.watchback2.android.views.WatchBackImageView
+            android:id="@+id/id_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:imageUrl="@{imgSrc}"
+            app:scaleType="centerInside"
+            tools:srcCompat="@drawable/watchback_bg_cover"
+            tools:scaleType="centerInside"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

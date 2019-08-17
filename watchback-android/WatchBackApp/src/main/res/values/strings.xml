@@ -1,0 +1,213 @@
+<resources>
+    <string name="app_name">WatchBack</string>
+    <string name="app_name_splash">W A T C H B A C K</string>
+    <string name="splash_text">Better than Free</string>
+
+    <!-- Added as per: https://developers.facebook.com/docs/analytics/quickstart-list/android/ -->
+    <string name="facebook_app_id">574786666362518</string>
+    <string name="fb_login_protocol_scheme">fb574786666362518</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="terms_and_conditions">Terms &amp; Conditions</string>
+    <string name="nointernet">    No Internet Connection</string>
+
+    <string name="like_perk_on_facebook">LIKE PERK ON\nFACEBOOK</string>
+    <string name="fblike_text">Be the first to hear about new Perk prizes, contests, apps and more</string>
+
+    <!-- The text to display on the Chromecast menu title. -->
+    <string name="media_route_menu_title">Play on&#8230;</string>
+    <string name="title_activity_videos">VideosActivity</string>
+
+    <string name="generic_error">Something went wrong, please try again later</string>
+    <string name="invalid_state">@string/generic_error</string>
+    <string name="error_title">Error</string>
+    <string name="ok">OK</string>
+    <string name="skip">Skip</string>
+    <string name="account_existing_msg"><![CDATA[ Already have an account?<br/><br/><strong><big><b>Log In</b></big></strong> ]]></string>
+    <string name="no_account_msg"><![CDATA[ <font color="#FFFFFF">Don’t have an account?<br/><br/><strong><big><b>Sign Up</b></big></strong></font> ]]></string>
+
+    <string name="usage_terms_message"><![CDATA[ <font color="#FFFFFF">I agree to the <a href="perk_wb_http://___watchback___terms___"><b>Terms & Conditions</b></a>, <a href="perk_wb_http://___watchback___privacy___"><b>Privacy Policy</b></a> and <a href="perk_wb_http://___watchback___vppa___"><b>VPPA</b></a>.<br/>I understand that WatchBack may send me the latest news, promotions and more.</font> ]]></string>
+    <string name="terms_unaccepted"><![CDATA[ <font color="#FFFFFF">Please  agree to the <a href="perk_wb_http://___watchback___terms___"><b>Terms & Conditions</b></a>, <a href="perk_wb_http://___watchback___privacy___"><b>Privacy Policy</b></a> and <a href="perk_wb_http://___watchback___vppa___"><b>VPPA</b></a>.</font> ]]></string>
+    <string name="usage_terms_message_unregistered"><![CDATA[ <font color="#FFFFFF">To continue, please agree to the <a href="perk_wb_http://___watchback___terms___"><b>Terms & Conditions</b></a>, <a href="perk_wb_http://___watchback___privacy___"><b>Privacy Policy</b></a> and <a href="perk_wb_http://___watchback___vppa___"><b>VPPA</b></a>.</font> ]]></string>
+
+    <!-- URLs & their identifiers -->
+    <string name="terms_url_identifier">___watchback___terms___</string>
+    <string name="terms_url">watchback.com/terms</string>
+    <string name="privacy_url_identifier">___watchback___privacy___</string>
+    <string name="privacy_url">watchback.com/privacy</string>
+    <string name="vppa_url_identifier">___watchback___vppa___</string>
+    <string name="vppa_url">watchback.com/vppa</string>
+
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="sign_up_email">Sign Up</string>
+    <string name="log_in">Log In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="or">OR</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="choose_a_password">Choose a Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="passwords_do_not_match">(Passwords do not match)</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="register_an_account">Register an account</string>
+    <string name="password_requirements">Min 8 characters; use numbers, upper &amp; lowercase letters</string>
+    <string name="spinner">spinner</string>
+    <string name="what_do_you_love_to_watch">What do you love to watch?</string>
+    <string name="get_started">GET STARTED</string>
+    <string name="continue_to_home">CONTINUE</string>
+    <string name="i_agree">I AGREE</string>
+    <string name="choose_3_or_more">Choose 3 Or MORE</string>
+    <string name="channels">Channels</string>
+    <string name="search_videos">Search Videos</string>
+    <string name="search_channel_videos">Search in this Channel</string>
+    <string name="no_results_found">Sorry, no results found</string>
+    <string name="close">Close</string>
+    <string name="recommended_for_you">Recommended For You</string>
+    <string name="thank_you_for_using_watchback">Thank you for using WatchBack</string>
+    <string name="register_msg">Registering allows us to save your show preferences, personalize your recommendations and enhance your experience with national partners like Boys and Girls Clubs and Amazon.</string>
+    <string name="register_msg2">You do not have to register to use WatchBack</string>
+    <string name="your_usage">Profile</string>
+    <string name="your_history">Your History</string>
+    <string name="edit">Edit</string>
+    <string name="donate_to_charity">Donate to Charity</string>
+    <string name="shop_gift_cards">Shop Gift Cards</string>
+    <string name="log_out">Log Out</string>
+    <string name="facebook_connected">Facebook Connected</string>
+    <string name="available_points_message">You have %1$s Points to use towards a gift card or donation!</string>
+    <string name="app_version_message">Copyright WatchBack %1$d\nVersion %2$s</string>
+    <string name="loyalty">Thank You</string>
+
+    <string name="redeem">Redeem</string>
+    <string name="donate">Donate</string>
+
+    <string name="do_any_of_these_channels_interest_you">Do any of these channels \ninterest you?</string>
+    <string name="cancel_channel">Cancel</string>
+    <string name="done">DONE</string>
+
+    <string name="app_settings">App Settings</string>
+    <string name="my_account">My Account</string>
+    <string name="share_watchback">Share WatchBack</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="edit_likes_interests"><![CDATA[edit likes & interests]]></string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="about_watchback">About WatchBack</string>
+    <string name="about_nielsen_measurement">About Nielsen Measurement</string>
+    <string name="theme">Dark Theme</string>
+    <string name="edit_channels">Edit Channels</string>
+    <string name="add_or_edit_channels">Add / Edit</string>
+    <string name="support_center">Support Center</string>
+    <string name="most_recent">Most Recent</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="length_shortest">Length (shortest)</string>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Prefer not to answer</item>
+    </string-array>
+
+    <string-array name="sort_modes">
+        <item>@string/most_recent</item>
+        <item>@string/most_popular</item>
+        <item>@string/length_shortest</item>
+    </string-array>
+
+    <string name="empty_string" />
+    <string name="playing_now">PLAYING NOW</string>
+    <string name="play_next">Watch Next</string>
+    <string name="next"><![CDATA[Next  >]]></string>
+    <string name="prev"><![CDATA[< Prev]]></string>
+    <string name="no_more_videos">No more videos!</string>
+    <string name="no_history">You haven\'t watched any videos yet.</string>
+
+    <string name="tab_home">Home</string>
+    <string name="tab_discover">Discover</string>
+    <string name="tab_channels">Channels</string>
+    <string name="tab_thank_you">Sweepstakes</string>
+    <string name="tab_tickets">Movie Tickets</string>
+    <string name="tab_settings">Settings</string>
+    <string name="explore">Explore</string>
+    <string name="signup_validation_under_13_years_old">Sorry, you are not eligible to participate</string>
+    <string name="signup_validation_born_today">Are you sure you were born today?</string>
+    <string name="signup_validation_born_future">Sorry, but we don\'t accept time travelers.</string>
+    <string name="featured">FEATURED</string>
+    <string name="before_you_continue">Please agree to our Terms &amp; Privacy</string>
+    <string name="feedback">feedback</string>
+    <string name="test_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+
+    <string name="share_watchback_url">https://go.onelink.me/7JBs/getWatchBack</string>
+    <string name="thank_you_points">Thank You Points</string>
+    <string name="your_thank_you_points_total">Your Thank You Points Total:</string>
+    <string name="rewards">Rewards:</string>
+
+    <!--<string name="account_message"><![CDATA[ <font color="#788995">Continue watching the shows you love with a cable subscription!</font><br></br><br></br><font color="#788995">Find availability in your area at <a href="perk_wb_http://www.cabletv.com"><b>CableTV.com</b></a></font><br></br><br></br><font color="#788995">Learn where to watch more episodes of your favorite shows at <a href="perk_wb_http://www.yidio.com"><b>Yidio.com</b></a></font> ]]></string>-->
+    <string name="account_message">Continue watching the shows you love with a cable subscription!\n\nFind availability in your area at</string>
+    <string name="account_message2">Learn where to watch more episodes of your favorite shows at</string>
+    <string name="account_message3">Donate Sweepstakes winnings to Boys &amp; Girls Clubs of America. Help open doors for America\'s youth.</string>
+    <string name="donate_button">Donate</string>
+    <string name="donate_button_url">perk_wb_http://watchback.com/reward/detail/144ab899-5e5a-4805-a4bb-b60dd901f4c6?access_token={access_token}&amp;safari=1</string>
+    <string name="visit_bgca">Visit BGCA.ORG</string>
+    <string name="visit_bgca_url">perk_wb_https://www.bgca.org/?safari=1</string>
+    <string name="cabletv">CableTV.com</string>
+    <string name="cabletv_url">perk_wb_http://www.cabletv.com</string>
+    <string name="yidio">Yidio.com</string>
+    <string name="yidio_url">perk_wb_http://www.yidio.com</string>
+    <string name="channel_name">Push Notifications</string>
+    <string name="channel_description">Push notifications for WatchBack</string>
+
+    <string name="support_url">https://watchbacksupport.zendesk.com/hc/en-us</string>
+    <string name="vppa">VPPA</string>
+    <string name="skip_login">Watch without signing up</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="line">|</string>
+    <string name="aysw">Are you still watching?</string>
+    <string name="continue_watching">Continue Watching</string>
+    <string name="exit">EXIT</string>
+
+    <string name="no_internet_msg">An Internet connection is required to use WatchBack. Please reconnect and try again.</string>
+    <string name="no_internet_title">No Internet Connection</string>
+    <string name="resume">Resume</string>
+    <string name="start_from_beginning">Start from beginning</string>
+
+
+    <string name="selection_disabled">Off</string>
+    <string name="selection_default">Default</string>
+    <string name="enable_random_adaptation">Enable random adaptation</string>
+    <string name="your_unique_code_is">Your unique code:</string>
+    <string name="total_points">Total Points:</string>
+    <string name="redeem_at">Redeem at:</string>
+    <string name="wb_link">WatchBack.com</string>
+    <string name="visit_wb_link">perk_wb_https://www.WatchBack.com/?access_token={access_token}&amp;safari=1</string>
+    <string name="watched">Watched</string>
+    <string name="play_video">play video</string>
+    <string name="close_video_description_screen">close video description screen</string>
+    <string name="unregistered_text_1">Watch 5 Shows and Get a FREE Fandango Promo Code*</string>
+    <string name="unregestered_text_2">Simply sign up or log in to be part of the program.</string>
+    <string name="sign_up">Sign up</string>
+    <string name="login_intro">Already have an account?</string>
+    <string name="tnc">*While Supplies Last. Up to $12 value.\nEnds 12/31/19</string>
+    <string name="movie_tickets">Movie Tickets</string>
+    <string name="your_watch_history">YOUR WATCH HISTORY</string>
+    <string name="click_to_open_settings">click to open settings</string>
+    <string name="request_more_info">Request More Info</string>
+    <string name="no_history_txt">You haven\'t watched any videos yet.</string>
+    <string name="start_watching">Start Watching</string>
+    <string name="go_to_homescreen">go to homescreen</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="us_1">US +1</string>
+    <string name="phone_verify_txt">Please take a moment to verify your mobile phone number. This helps us confirm your identity and secure your account.\n\nWatchBack will send a text with verification code.\n\n</string>
+    <string name="continue_btn">Continue</string>
+    <string name="rates_may_apply">Message and data rates may apply.</string>
+    <string name="enter_verification_code">Enter Verification Code</string>
+    <string name="code_sent">Code Sent</string>
+    <string name="resend"><u>Resend</u></string>
+    <string name="available_on_watchback">Available on watchback</string>
+    <string name="you_must_be_registered_to_do_this">You must be registered to do this.</string>
+    <string name="email_login">Email Login:</string>
+    <string name="phone">Phone:</string>
+    <string name="gender_account">Gender:</string>
+</resources>

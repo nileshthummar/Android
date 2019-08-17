@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- In case any items are modified here, make sure to update the index accordingly in integers.xml -->
+    <item
+        android:id="@+id/navigation_discover"
+        android:icon="@drawable/ic_tab_1_discover_on"
+        android:title="@string/tab_discover" />
+
+    <item
+        android:id="@+id/navigation_channels"
+        android:icon="@drawable/ic_tab_2_subscribe_on"
+        android:title="@string/tab_channels" />
+
+    <item
+        android:id="@+id/navigation_tickets"
+        android:icon="@drawable/ic_tab_3_rewards_on"
+        android:title="@string/tab_tickets" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/tab_settings" />
+
+</menu>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="channelItemData"
+            type="com.watchback2.android.models.Channel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_parent_element"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:background="@{safeUnbox(channelItemData.favorite) ? @drawable/rounded_corner_radius_3_accent : @drawable/rounded_corner_radius_3, default=@drawable/rounded_corner_radius_3}"
+        android:paddingBottom="15dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="15dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_channel_element"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:imageUrl="@{channelItemData.logoImageUrl}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title_channel_element"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingLeft="14.4dp"
+            android:paddingStart="14.4dp"
+            android:text="@{channelItemData.name}"
+            android:textAppearance="@style/TextAppearance_BrandonMedium"
+            android:textSize="17.3sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_subtitle_channel_element"
+            app:layout_constraintLeft_toRightOf="@+id/iv_channel_element"
+            app:layout_constraintTop_toTopOf="@+id/iv_channel_element"
+            tools:ignore="RtlSymmetry"
+            tools:text="Channel Name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_subtitle_channel_element"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:paddingLeft="14.4dp"
+            android:paddingStart="14.4dp"
+            android:text="@{channelItemData.shortDescription}"
+            android:textColor="@{safeUnbox(channelItemData.favorite) ? @color/white : @color/steel, default=@color/steel}"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_channel_element"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_title_channel_element"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_channel_element"
+            android:textSize="12sp"
+            app:fontFamily="@font/sf_pro_display_regular"
+            tools:fontFamily="@font/sf_pro_display_regular"
+            tools:ignore="RtlSymmetry"
+            tools:text="Lorem ipsum dolor sit amet adipiscing elit" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

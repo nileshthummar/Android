@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.VideosListViewModel" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/dummy_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- The FrameLayout here is just to prevent this view from taking up space(height) in
+        RecyclerView, when the visibility is gone. Just setting visibility to GONE for the outermost
+        parent still makes the layout take some space in the list due to the RecyclerView adding margins
+        to the child items -->
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/id_video_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="7.5dp"
+            android:paddingBottom="7.5dp"
+            android:visibility="@{!viewModel.dataLoading &amp;&amp; viewModel.isEmptyList ? View.GONE : View.VISIBLE}">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/id_title_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="@{viewModel.dataLoading || viewModel.hideHeader ? View.GONE : View.VISIBLE}">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_title"
+                    style="@style/WideLetterSpacing_0_08"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="13.5dp"
+                    android:layout_weight="1"
+                    android:lineSpacingExtra="2sp"
+                    android:singleLine="true"
+                    android:text="@{viewModel.title}"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/RobotoRegular"
+                    android:textSize="@dimen/title_height_home"
+                    android:visibility="@{viewModel.title.length > 0 ? View.VISIBLE : View.GONE}"
+                    tools:text="recommended for you"
+                    tools:textSize="@dimen/title_height_channels"
+                    tools:visibility="visible" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/id_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="@{viewModel.dataLoading || viewModel.isDummyLoader ? View.GONE : View.VISIBLE}"
+                app:layout_margins="@{viewModel.hideHeader ? @dimen/home_video_list_gone_margin : @dimen/home_video_list_margin}"
+                tools:visibility="visible" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </FrameLayout>
+
+</layout>

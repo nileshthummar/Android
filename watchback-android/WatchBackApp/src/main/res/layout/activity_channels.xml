@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.ChannelsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/id_channels_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_channels_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22.2dp"
+            android:paddingLeft="24dp"
+            android:text="@string/do_any_of_these_channels_interest_you"
+            android:textAppearance="@style/TextAppearance_BrandonMedium"
+            android:textSize="19.2sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_skip_channels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::handleCancelButtonClick}"
+            android:paddingRight="24dp"
+            android:text="@string/cancel_channel"
+            android:visibility="@{viewModel.isEditingFromSettings ? View.VISIBLE : View.GONE}"
+            android:textAllCaps="false"
+            android:textColor="@color/steel"
+            android:textSize="16.3sp"
+            app:fontFamily="@font/sf_pro_text_medium"
+            app:layout_constraintBaseline_toBaselineOf="@+id/id_channels_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/id_channels_title" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/id_submit_channels"
+            android:layout_width="match_parent"
+            android:layout_height="52.8dp"
+            android:layout_marginBottom="42.2dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:onClick="@{viewModel::handleDoneButtonClick}"
+            android:text="@{viewModel.isEditingFromSettings ? @string/done : @string/get_started}"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance_BrandonBold"
+            android:textColor="@color/white"
+            android:textSize="13.4sp"
+            app:backgroundTint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:backgroundTint="@color/colorAccent"
+            tools:text="@string/get_started" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/id_channels_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="10.6dp"
+            app:channelItems="@{viewModel.channelsList}"
+            app:layout_constraintBottom_toTopOf="@id/id_submit_channels"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_channels_title"
+            app:layout_constraintVertical_weight="1"
+            tools:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/id_progress_bar_channels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

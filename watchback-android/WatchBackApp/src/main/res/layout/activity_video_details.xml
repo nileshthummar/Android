@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.watchback2.android.viewmodels.VideoDetailsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_parent_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".activities.VideoDetailsActivity">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/id_cover_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:imageUrl="@{viewmodel.getBackgroundImageUrl}"
+                app:riv_corner_radius="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:scaleType="topCenterCrop"
+                app:srcCompat="@drawable/watchback_bg_cover"
+                tools:srcCompat="@drawable/watchback_bg_cover" />
+
+            <View
+                android:id="@+id/id_mask_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?attr/maskGradient"
+                app:layout_constraintBottom_toBottomOf="@id/id_cover_image"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="@id/id_cover_image"
+                app:layout_constraintRight_toRightOf="@id/id_cover_image"
+                app:layout_constraintTop_toTopOf="@id/id_cover_image"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/ic_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:paddingLeft="30dp"
+                android:paddingBottom="30dp"
+                android:contentDescription="@string/close_video_description_screen"
+                android:onClick="onCloseClick"
+                app:layout_constraintRight_toRightOf="@+id/id_cover_image"
+                app:layout_constraintTop_toTopOf="@+id/id_cover_image"
+                app:srcCompat="@drawable/ic_close_round" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_horizontal_for_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".35"
+                app:layout_constraintTop_toTopOf="@+id/id_cover_image" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="8dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="8dp" />
+
+            <TextView
+                android:id="@+id/id_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.videoTitle}"
+                android:textAppearance="@style/TextAppearance_BrandonBold"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+                app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal_for_text"
+                tools:text="Temptation Island" />
+
+            <TextView
+                android:id="@+id/id_tv_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.videoSubTitle}"
+                android:textAppearance="@style/TextAppearance_BrandonBold"
+                android:textColor="@color/login_hint_text_color"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toLeftOf="@+id/guideline_vertical_left"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_title"
+                tools:text="USA  –  S3, Ep6" />
+
+            <TextView
+                android:id="@+id/id_tv_body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{viewmodel.videoBody}"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@+id/guideline_vertical_left"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_subtitle"
+                tools:text="@string/test_text" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/id_iv_channel_icon"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginRight="8dp"
+                android:visibility="@{viewmodel.getRedirectButtonVisibility}"
+                app:imageUrl="@{viewmodel.getChannelIconUrl}"
+                app:riv_corner_radius="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/id_btn_redirect"
+                app:layout_constraintLeft_toRightOf="@+id/guideline_vertical_left"
+                app:layout_constraintRight_toLeftOf="@+id/id_btn_redirect"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_body"
+                app:layout_constraintTop_toTopOf="@+id/id_btn_redirect"
+                tools:src="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/id_btn_redirect"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_corner"
+                android:drawablePadding="20dp"
+                android:gravity="center"
+                android:text="@{viewmodel.redirectBtnText}"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance_BrandonBold"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:visibility="@{viewmodel.getRedirectButtonVisibility}"
+                android:onClick="onWatchOnProviderClick"
+                app:backgroundTint="@color/video_details_theme_light"
+                app:layout_constraintLeft_toRightOf="@+id/id_iv_channel_icon"
+                app:layout_constraintRight_toLeftOf="@+id/guideline_vertical_right"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_body"
+                tools:backgroundTint="@color/video_details_theme_light"
+                tools:text="@string/register_an_account" />
+
+            <RelativeLayout
+                android:id="@+id/id_btn_play_resume_bg"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/rounded_red_btn"
+                android:onClick="onPlayButtonClick"
+                app:layout_constraintLeft_toRightOf="@+id/guideline_vertical_left"
+                app:layout_constraintRight_toLeftOf="@+id/guideline_vertical_right"
+                app:layout_constraintTop_toBottomOf="@+id/id_btn_redirect">
+
+
+                <ImageView
+                    android:id="@+id/id_iv_play_resume_icon"
+                    android:layout_width="14dp"
+                    android:layout_height="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/id_iv_play_resume_text"
+                    android:contentDescription="@string/play_video"
+                    android:src="@drawable/play_icon"
+                    app:backgroundTint="@color/white"
+                    tools:backgroundTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/id_iv_play_resume_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:paddingStart="5dp"
+                    android:text="@{viewmodel.getPlayButtonText}"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance_BrandonBold"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    tools:text="Play video" />
+
+
+            </RelativeLayout>
+
+            <ProgressBar
+                android:id="@+id/id_progress_bar_video_details"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="15dp"
+                android:max="100"
+                android:progress="@{viewmodel.getVideoProgress}"
+                android:visibility="@{viewmodel.getProgressVisibility}"
+                android:progressDrawable="@drawable/custom_progress_bar"
+                app:layout_constraintLeft_toRightOf="@+id/guideline_vertical_left"
+                app:layout_constraintRight_toLeftOf="@+id/id_tv_time"
+                app:layout_constraintTop_toBottomOf="@+id/id_btn_play_resume_bg" />
+
+            <TextView
+                android:id="@+id/id_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@{viewmodel.getTimeLeft}"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textColor="@color/steel"
+                android:textSize="12sp"
+                android:visibility="@{viewmodel.getProgressVisibility}"
+                app:layout_constraintBottom_toBottomOf="@+id/id_progress_bar_video_details"
+                app:layout_constraintTop_toTopOf="@+id/id_progress_bar_video_details"
+                app:layout_constraintLeft_toRightOf="@+id/id_progress_bar_video_details"
+                app:layout_constraintRight_toLeftOf="@+id/guideline_vertical_right"
+                tools:text="1hr 42m remaining" />
+
+            <!-- dummy view for padding-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toBottomOf="@+id/id_progress_bar_video_details" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

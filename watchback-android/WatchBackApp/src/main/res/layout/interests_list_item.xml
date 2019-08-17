@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="interestItemData"
+            type="com.watchback2.android.models.Interest" />
+    </data>
+
+    <!--
+    FrameLayout is required because we want the entire row to be clickable... if we make the TextView
+    as match_parent, then the background is also increased to fill the width, so we add a parent
+    instead & make that clickable
+    -->
+    <FrameLayout
+        android:id="@+id/id_interest_name_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_interest_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:paddingLeft="9dp"
+            android:paddingRight="9dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="start|center_vertical"
+            android:text="@{interestItemData.interest}"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-medium"
+            android:lineSpacingExtra="1sp"
+            android:textSize="23sp"
+            android:background="@{safeUnbox(interestItemData.selected) ? @drawable/rounded_corner_radius_3_accent : @drawable/rounded_corner_radius_3, default=@drawable/rounded_corner_radius_3}"
+            tools:background="@drawable/rounded_corner_radius_3_accent"
+            tools:text="ENTERTAINMENT"
+            />
+
+    </FrameLayout>
+
+</layout>

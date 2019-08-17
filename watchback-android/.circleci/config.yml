@@ -1,0 +1,267 @@
+# Java Gradle CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+references:
+  root_workspace: &root_workspace
+    ~/workspace/watchback-android
+
+  container_config: &container_config
+    docker:
+      # specify the version you desire here
+      - image: circleci/android:api-28-alpha
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # example:
+      # - image: circleci/postgres:9.4
+    #machine: true
+    working_directory: *root_workspace
+    # Branches: Commenting from here as this is added in workflow, if workflow is not added then need to add it here.
+    #branches:
+      # branches which we want to execute
+      # In this case only “master” branch and "junit-tests" branch will be executed.
+      #only :
+      #  - master
+      #  - junit-tests
+    # resource class is not configurable for this project yet. Hence commenting out
+    # resource_class: large
+    environment:
+      # Customize the JVM maximum heap limit
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx4096m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError"'
+      # from https://discuss.circleci.com/t/circle-ci-v2-and-android-memory-issues/11207/14
+      JVM_OPTS: "-Xms512m -Xmx3300m -XX:ParallelGCThreads=1 -XX:ConcGCThreads=1 -Djava.util.concurrent.ForkJoinPool.common.parallelism=1"
+      # parallelism : N can also be used for Parallel jobs, where N is the number of parallel independent executors
+
+  general_cache_key: &general_cache_key
+    key: v1-dependencies-{{ checksum "build.gradle" }}-{{ checksum "WatchBackApp/build.gradle" }}-{{ checksum ".circleci/config.yml" }}-{{ checksum "gradle.properties" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *root_workspace
+
+jobs:
+  build-qa:
+    <<: *container_config
+    steps:
+      - checkout
+      - run: echo 'export KEYSTORE=${HOME}/workspace/watchback-android/WatchBackApp/perkRelease.keystore' >> $BASH_ENV
+      # Download and cache dependencies
+      - restore_cache:
+          <<: *general_cache_key
+          #keys:
+           # - v1-dependencies-{{ checksum "build.gradle" }}-{{ checksum  "WatchBackApp/build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+           # - v1-dependencies-
+      - run:
+          name: Download Dependencies
+          command: |
+            chmod +x scripts/build_setup.sh
+            ./scripts/build_setup.sh
+      - run:
+          name: Assemble build
+          command: |
+            chmod +x scripts/build_env.sh
+            TAG_MSG=$(git tag -ln "$CIRCLE_TAG")
+            ./scripts/build_env.sh "$TAG_MSG"
+      - store_artifacts:
+          path: WatchBackApp/build/outputs/apk
+          destination: apks
+      - store_artifacts:
+          path: WatchBackApp/build/reports/
+          destination: lint-report
+          # Note - At this time the  test-results are not shown as artifacts in the web UI using store_test_results
+          # hence adding it as store_artifacts as mentioned in document.
+      - store_artifacts:
+          path: WatchBackApp/build/test-results
+          destination: test-results
+      - store_test_results:
+          path: WatchBackApp/build/test-results
+      - persist_to_workspace:
+          root: *root_workspace
+          paths:
+            - .
+      - save_cache:
+          <<: *general_cache_key
+          paths:
+            - ~/.gradle
+
+  build-dev:
+    <<: *container_config
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          <<: *general_cache_key
+      - run:
+          name: Download Dependencies
+          command: |
+            chmod +x scripts/build_setup.sh
+            ./scripts/build_setup.sh
+      - run:
+          name: Assemble build
+          command: ./gradlew --stacktrace --info clean cleanBuildCache assembleDevRelease
+      - store_artifacts:
+          path: WatchBackApp/build/outputs/apk
+          destination: apks
+      - store_artifacts:
+          path: WatchBackApp/build/reports/
+          destination: lint-report
+          # Note - At this time the  test-results are not shown as artifacts in the web UI using store_test_results
+          # hence adding it as store_artifacts as mentioned in document.
+      - store_artifacts:
+          path: WatchBackApp/build/test-results
+          destination: test-results
+      - store_test_results:
+          path: WatchBackApp/build/test-results
+      - persist_to_workspace:
+          root: *root_workspace
+          paths:
+            - .
+      - save_cache:
+          <<: *general_cache_key
+          paths:
+            - ~/.gradle
+
+  build-prod:
+    <<: *container_config
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          <<: *general_cache_key
+      - run:
+          name: Download Dependencies
+          command: |
+            chmod +x scripts/build_setup.sh
+            ./scripts/build_setup.sh
+      - run:
+          name: Assemble build
+          command: ./gradlew --stacktrace --info clean cleanBuildCache assembleProdRelease
+      - store_artifacts:
+          path: WatchBackApp/build/outputs/apk
+          destination: apks
+      - store_artifacts:
+          path: WatchBackApp/build/reports/
+          destination: lint-report
+          # Note - At this time the  test-results are not shown as artifacts in the web UI using store_test_results
+          # hence adding it as store_artifacts as mentioned in document.
+      - store_artifacts:
+          path: WatchBackApp/build/test-results
+          destination: test-results
+      - store_test_results:
+          path: WatchBackApp/build/test-results
+      - persist_to_workspace:
+          root: *root_workspace
+          paths:
+            - .
+      - save_cache:
+          <<: *general_cache_key
+          paths:
+            - ~/.gradle
+
+  #  check-test:
+  #    <<: *container_config
+  #    steps:
+  #      - *attach_workspace
+  #      - restore_cache:
+  #          <<: *general_cache_key
+  #      - run:
+  #          name: Run AndroidLint and Unit tests Checks
+  #          command: ./gradlew --stacktrace --info lintProdRelease testProdReleaseUnitTest
+  #      - store_artifacts:
+  #          path: WatchBackApp/build/reports/
+  #          destination: test-reports
+  #      # Note - At this time the  test-results are not shown as artifacts in the web UI using store_test_results
+  #      # hence adding it as store_artifacts as mentioned in document.
+  #      - store_artifacts:
+  #          path: WatchBackApp/build/test-results
+  #          destination: test-results
+  #      - store_test_results:
+  #          path: WatchBackApp/build/test-results
+  #      - store_artifacts:
+  #          path: WatchBackApp/build/outputs/gnag
+  #          destination: gnag-check-results
+
+  deploy:
+    <<: *container_config
+    steps:
+      - *attach_workspace
+      - restore_cache:
+          <<: *general_cache_key
+      # If debug apk is created above then use crashlyticsUploadDistributionDebug command
+      # else use crashlyticsUploadDistributionRelease in case of Release apk
+      - run:
+          name: Deploy to Fabric Beta
+          command: |
+
+            # -------------------------------------- Unused --------------------------------------
+            # Get the last tagged version. If last tagged version is like "play-store-3.13.0.1", then
+            # get the tag name before that. Do that until we get a tag version like "3.13.0.1". Also,
+            # make sure that we have release notes with the given tag in CHANGELOG.md.
+            # LAST_TAG=$(git describe --abbrev=0 "$CIRCLE_TAG")
+            # VERSION_REGEX=^[0-9]+.[0-9]+.[0-9]+.rc.[0-9]+$
+            # until [[ "$LAST_TAG" =~ ${VERSION_REGEX} ]] && grep -Fq "$LAST_TAG" CHANGELOG.md ; do echo "done"; LAST_TAG=$(git describe --abbrev=0 "$LAST_TAG"^); echo "$LAST_TAG"; done
+
+            # # Get the release notes between 2 tagged versions
+            # cat CHANGELOG.md | sed -n "/v$CIRCLE_TAG/,/v$LAST_TAG/p" | sed '1,3d;$d' > release_notes.txt
+            # ./gradlew crashlyticsUploadDistributionDevRelease
+            # ------------------------------------ Unused END ------------------------------------
+
+            # Get the release notes between current & last tagged version
+            TAGS_COUNT=$(git tag | wc -l)
+            if [ $TAGS_COUNT -le 1 ]; then
+              cat CHANGELOG.md |  sed '/^$/d' | sed '1d' > release_notes.txt
+            else
+              LAST_TAG=$(git describe --tags --abbrev=0 "$CIRCLE_TAG"^)
+              cat CHANGELOG.md |  sed '/^$/d' | sed -n "/$CIRCLE_TAG/,/$LAST_TAG/p" | sed '1d;$d' > release_notes.txt
+            fi
+
+            echo "--------RELEASE NOTES PREVIEW-------"
+            cat release_notes.txt
+
+            chmod +x scripts/distribute_build.sh
+            TAG_MSG=$(git tag -ln "$CIRCLE_TAG")
+            ./scripts/distribute_build.sh "$TAG_MSG"
+
+workflows:
+  version: 2
+  build_check_test_deploy:
+    jobs:
+      - build-qa:
+          filters:
+            tags:
+#              only: /[0-9]+.[0-9]+.[0-9]+.rc.[0-9]+/
+              only: /[0-9]+.[0-9]+.[0-9]+.*/
+            branches:
+              ignore: /.*/
+      - build-dev:
+          filters:
+            branches:
+              only:
+                - /feature.*/
+                - develop
+                - /bugfix.*/
+      - build-prod:
+          filters:
+            branches:
+              only: /release.*/
+#      - check-test:
+#          requires:
+#            - build-qa
+#          filters:
+#            tags:
+##              only: /[0-9]+.[0-9]+.[0-9]+.rc.[0-9]+/
+#              only: /[0-9]+.[0-9]+.[0-9]+.*/
+      - deploy:
+          requires:
+            - build-qa
+#            - check-test
+          filters:
+            tags:
+#              only: /[0-9]+.[0-9]+.[0-9]+.rc.[0-9]+/
+              only: /[0-9]+.[0-9]+.[0-9]+.*/
+            branches:
+              ignore: /.*/

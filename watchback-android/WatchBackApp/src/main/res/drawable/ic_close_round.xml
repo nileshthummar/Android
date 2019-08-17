@@ -1,0 +1,5 @@
+<vector android:height="15dp" android:viewportHeight="34"
+    android:viewportWidth="34" android:width="15dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="?attr/viewBackgroundInverse" android:fillType="evenOdd" android:pathData="M17.04,33.08C8.027,33.08 0.72,25.773 0.72,16.76S8.027,0.44 17.04,0.44s16.32,7.307 16.32,16.32 -7.307,16.32 -16.32,16.32zM20.111,17.062l3.24,-3.24a1.948,1.948 0,0 0,-0.009 -2.761,1.948 1.948,0 0,0 -2.761,-0.008l-3.24,3.24 -3.239,-3.24a1.948,1.948 0,0 0,-2.761 0.008,1.948 1.948,0 0,0 -0.008,2.762l3.239,3.239 -3.24,3.24a1.948,1.948 0,0 0,0.009 2.76c0.77,0.77 2.001,0.769 2.761,0.009l3.24,-3.24 3.239,3.24c0.76,0.76 1.991,0.762 2.761,-0.008a1.948,1.948 0,0 0,0.008 -2.762l-3.239,-3.24z"
+        android:strokeColor="?attr/settingsTextItemBackground" android:strokeWidth="0.5" />
+</vector>

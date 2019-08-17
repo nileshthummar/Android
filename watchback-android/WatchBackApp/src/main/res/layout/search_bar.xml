@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/search_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        >
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="0dp"
+            android:layout_height="34.6dp"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginLeft="7.7dp"
+            android:layout_marginStart="7.7dp"
+            android:layout_weight="1"
+            android:background="@drawable/search_bg_rounded_corner"
+            android:paddingLeft="-12dp"
+            android:paddingStart="-12dp"
+            android:theme="@style/AppSearchView"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/search_videos"
+            app:searchHintIcon="@null"
+            tools:fontFamily="@font/sf_pro_txt_reg" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="9dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/close"
+            android:textColor="@color/steel"
+            android:textSize="16.3sp"
+            app:fontFamily="@font/sf_pro_text_regular"
+            tools:fontFamily="@font/sf_pro_txt_reg" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.watchback2.android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- Optional : For AppsFlyer SDK -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- Location permissions removed as per https://jira.rhythmone.com/browse/PEWAN-351 -->
+    <!-- Leanplum Geofencing & Location-based messaging -->
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION"
+        tools:node="remove" /> <!-- Removed as per https://jira.rhythmone.com/browse/PEWAN-295 -->
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:node="remove" />
+    <!--
+    Added for location service. As per documentataion here:
+    https://developer.android.com/guide/topics/location/strategies
+    "Caution: If your app targets Android 5.0 (API level 21) or higher, you must declare that
+    your app uses the android.hardware.location.network or android.hardware.location.gps hardware
+    feature in the manifest file, depending on whether your app receives location updates from
+    NETWORK_PROVIDER or from GPS_PROVIDER. If your app receives location information from either
+    of these location provider sources, you need to declare that the app uses these hardware
+    features in your app manifest. On devices running versions prior to Android 5.0 (API 21),
+    requesting the ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION permission includes an implied
+    request for location hardware features. However, requesting those permissions does not
+    automatically request location hardware features on Android 5.0 (API level 21) and higher."
+
+    We use only COARSE_LOCATION, so we just need the network-hardware feature permission:
+    'If you are using both NETWORK_PROVIDER and GPS_PROVIDER, then you need to request only the
+    ACCESS_FINE_LOCATION permission, because it includes permission for both providers. Permission
+    for ACCESS_COARSE_LOCATION allows access only to NETWORK_PROVIDER'
+    -->
+    <uses-feature android:name="android.hardware.location.network" />
+
+    <application
+        android:name=".common.WatchBackApplication"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme"
+        tools:ignore="UnusedAttribute"
+        tools:replace="android:allowBackup, android:supportsRtl, android:fullBackupContent">
+        <activity
+            android:name=".activities.LaunchActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- Accepts URIs that begin with "watchback://” -->
+                <data android:scheme="watchback" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="qa5.apsalar.com"
+                    android:pathPrefix="/api/v1/appstore/com.watchback2.android"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.WalkthroughActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.ForceUpdateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.SignupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.TermsGateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.WatchbackWebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <data android:scheme="perk_wb_https" />
+                <data android:scheme="perk_wb_http" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.WatchbackOptOutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.SessionExpiredActivity"
+            android:theme="@style/AppTheme" />
+        <!--<activity
+            android:name=".activities.SettingsFragment"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />-->
+        <activity
+            android:name="com.watchback2.android.activities.MyAccountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.watchback2.android.activities.VideoPlayerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.VideoDetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <!--
+ <activity
+            android:name="com.google.android.libraries.cast.companionlibrary.cast.player.VideoCastControllerActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:parentActivityName=".activities.VideoPlayerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="10e8253b1819c99dbd6a1190196fa92a8656d508" />
+
+        <activity
+            android:name=".activities.BrandDetailsActivity"
+            android:label="@string/title_activity_videos"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.InterestsActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.ChannelsActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.VerifyPhoneActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <!--
+ Make sure that AppsFlyer is ALWAYS the first receiver in the below order
+        as it handles passing on the broadcast to other receivers as per the documentation
+        -->
+        <!-- AppsFlyer -->
+        <receiver
+            android:name="com.appsflyer.MultipleInstallBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver> <!-- Singular -->
+        <receiver
+            android:name="com.singular.sdk.SingularInstallReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver> <!-- android:name="com.leanplum.LeanplumPushFirebaseMessagingService" -->
+        <service
+            android:name=".common.WatchBackFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> <!-- android:name="com.leanplum.LeanplumPushFcmListenerService" -->
+        <!--
+<service
+            android:name=".common.WatchBackPushFcmListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        -->
+        <!--
+ Required for Brightcove FreeWheel plugin, due to deprication of Apache HTTP client
+        support on Android Pie (9): https://support.brightcove.com/android-pie-support-native-sdk-android
+        -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+        <!--
+ Required for com.google.firebase:firebase-ads:17.0.0 & above, otherwise app crashes
+        https://developers.google.com/ad-manager/mobile-ads-sdk/android/quick-start#update_your_androidmanifestxml
+        -->
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true" />
+    </application>
+
+</manifest>

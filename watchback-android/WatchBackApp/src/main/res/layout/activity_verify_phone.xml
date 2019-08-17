@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.VerifyPhoneActivityViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/id_back_verify_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:minHeight="?attr/actionBarSize"
+                android:onClick="@{viewModel::handleBackClick}"
+                android:padding="15dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/id_title_phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/id_title_phone"
+                app:srcCompat="@drawable/back_btn"
+                app:tint="?android:attr/textColor" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_title_verify_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:lineSpacingExtra="3.9sp"
+                android:minHeight="?attr/actionBarSize"
+                android:singleLine="true"
+                android:text="@string/enter_verification_code"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="17.3sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/id_iv_tick"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="54dp"
+                android:contentDescription="@null"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/id_tv_code_sent"
+                app:layout_constraintTop_toBottomOf="@+id/id_title_verify_phone"
+                app:srcCompat="@drawable/ic_tick_in_circle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_tv_code_sent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:lineSpacingExtra="3.9sp"
+                android:singleLine="true"
+                android:text="@string/code_sent"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@+id/id_iv_tick"
+                app:layout_constraintLeft_toRightOf="@+id/id_iv_tick"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/id_iv_tick" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_tv_des_sent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:gravity="center"
+                android:lineSpacingExtra="9dp"
+                android:paddingStart="37dp"
+                android:paddingEnd="37dp"
+                android:text="@{viewModel.getDescriptionText()}"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="13sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_code_sent"
+                tools:text="We just sent a message to (555) 555-5555 with a code for you to enter here:" />
+
+            <EditText
+                android:id="@+id/id_et_code_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
+                android:maxLength="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="22sp"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/id_et_code_2"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_des_sent"
+                tools:text="" />
+
+            <EditText
+                android:id="@+id/id_et_code_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
+                android:maxLength="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="22sp"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintLeft_toRightOf="@+id/id_et_code_1"
+                app:layout_constraintRight_toLeftOf="@+id/id_et_code_3"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_des_sent"
+                tools:text="" />
+
+
+            <EditText
+                android:id="@+id/id_et_code_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
+                android:maxLength="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="22sp"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintLeft_toRightOf="@+id/id_et_code_2"
+                app:layout_constraintRight_toLeftOf="@+id/id_et_code_4"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_des_sent"
+                tools:text="" />
+
+
+            <EditText
+                android:id="@+id/id_et_code_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
+                android:maxLength="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="22sp"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintLeft_toRightOf="@+id/id_et_code_3"
+                app:layout_constraintRight_toLeftOf="@+id/id_et_code_5"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_des_sent"
+                tools:text="" />
+
+
+            <EditText
+                android:id="@+id/id_et_code_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
+                android:maxLength="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="22sp"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintLeft_toRightOf="@+id/id_et_code_4"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_des_sent"
+                tools:text="" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_tv_resent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:clickable="@{viewModel.resendBtnClickable}"
+                android:gravity="center"
+                android:onClick="@{viewModel::handleResendButtonClick}"
+                android:text="@string/resend"
+                android:textAppearance="@style/TextAppearance_BrandonBold"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_et_code_1"
+                tools:text="@string/resend" />
+
+            <Button
+                android:id="@+id/id_btn_continue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="47dp"
+                android:layout_marginEnd="16dp"
+                android:alpha="@{viewModel.continueButtonOpacity}"
+                android:background="@drawable/rounded_bg"
+                android:clickable="@{viewModel.continueBtnClickable}"
+                android:onClick="@{viewModel::handleContinueButtonClick}"
+                android:text="@string/continue_btn"
+                android:textAppearance="@style/TextAppearance_BrandonBold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:backgroundTint="@color/colorAccent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_resent" />
+
+            <TextView
+                android:id="@+id/id_tv_tnc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="39dp"
+                android:alpha=".5"
+                android:gravity="center"
+                android:text="@string/rates_may_apply"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="13sp"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_btn_continue" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.progressBarVisibility}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

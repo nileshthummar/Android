@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.HomeFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/id_header"
+            layout="@layout/left_nav_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Focusable in touch mode is set to true here to prevent the UI from
+             jumping to last populated RecyclerView in the UI -->
+        <View
+            android:id="@+id/id_separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line_gradient"
+            android:focusableInTouchMode="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_header" />
+
+        <com.watchback2.android.views.WatchBackSwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipe_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_separator"
+            app:onLoadStateChange="@{viewModel.dataLoading}">
+
+            <com.watchback2.android.views.SmoothScrollEnabledRecyclerView
+                android:id="@+id/id_home_list"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="@{viewModel.dataLoading ? View.GONE : View.VISIBLE}"
+                android:descendantFocusability="afterDescendants"
+                app:homeItemsList="@{viewModel.homeItemsList}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintVertical_weight="1"
+                tools:visibility="visible" />
+
+        </com.watchback2.android.views.WatchBackSwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/id_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.internalDataLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/id_progress_bar_shimmer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_separator"
+            app:shimmer_base_alpha_nightMode="@{@fraction/opacity_60}"
+            app:shimmer_base_alpha_dayMode="@{@fraction/opacity_37_5}"
+            android:visibility="@{viewModel.dataLoading ? View.VISIBLE : View.GONE}"
+            tools:visibility="visible" >
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:orientation="vertical">
+
+                <com.watchback2.android.views.WatchBackImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginTop="12dp"
+                    app:scaleType="fillXTopCenter"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/ic_carousel_loading" />
+
+                <!--<include layout="@layout/home_fragment_loading_view_row" />-->
+
+                <com.watchback2.android.views.WatchBackImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="14dp"
+                    app:scaleType="fillXTopCenter"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/ic_carousel_loading" />
+
+                <com.watchback2.android.views.WatchBackImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="14dp"
+                    app:scaleType="fillXTopCenter"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/ic_carousel_loading" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

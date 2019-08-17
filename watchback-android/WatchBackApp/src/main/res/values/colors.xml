@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#121314</color>
+    <color name="colorPrimaryDark">#121314</color>
+    <color name="colorMenuText">#484b4d</color>
+    <color name="colorAccent">#ff0035</color>
+    <color name="colorAccentDisabled">#4Dff0035</color>
+
+
+    <color name="black">#000000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="black_70_pc_opacity">#B3000000</color>
+    <color name="white_70_pc_opacity">#B3FFFFFF</color>
+    <color name="login_hint_text_color">#a0a2a7</color>
+    <color name="white">#ffffff</color>
+    <color name="text_color_grey">#9197a3</color>
+    <color name="blue_link">#51a8ee</color>
+    <color name="light_grey">#e2e2e2</color>
+    <color name="ash">#979797</color>
+    <color name="ash_36">#5A979797</color>
+    <color name="space_grey">#3e3e3e</color>
+    <color name="ancmt_select_text">#3e3e3e</color>
+    <color name="black_70">#b3000000</color>
+    <color name="app_background">@color/dark_two</color>
+    <color name="app_background_light">@color/light_two</color>
+    <color name="app_background_light_darker">#c2c4c5</color>
+    <color name="white_20">#33ffffff</color>
+    <color name="facebook_blue">#4267b1</color>
+    <color name="steel">#788995</color>
+    <color name="error_text">#EC415A</color>
+    <color name="search_bg_color">#198e8e93</color>
+    <color name="disabled_btn_color">#46464e</color>
+
+    <color name="dark_two">#1b1b25</color>
+    <color name="dark_two_00">#001b1b25</color>
+    <color name="dark_70">#b31b1b25</color>
+    <color name="dark_40">#651b1b25</color>
+    <color name="light_two">#f5f7f8</color>
+    <color name="light_two_15">#24f5f7f8</color>
+    <color name="light_70">#b3f5f7f8</color>
+    <color name="light_40">#65f5f7f8</color>
+    <color name="brand_button_tint">#65434358</color>
+    <color name="separator_color">#21222c</color>
+    <color name="separator_color_light">#fbfcfc</color>
+    <color name="logout_button">#282931</color>
+    <color name="logout_button_light">#e8ebed</color>
+    <color name="settings_item_bg">#14141C</color>
+    <color name="settings_item_bg_light">#FBFCFC</color>
+
+    <color name="viewpager_indicator_selected">#fecc28</color>
+    <color name="viewpager_indicator_deselected">@color/steel</color>
+
+    <color name="video_details_theme_light">#FFE6EB</color>
+
+    <color name="popup_background_color_dark">#20202d</color>
+
+    <!-- Brightcove VideoPlayer: Change the seekbar colorc -->
+    <color name="bmc_seekbar_played">@color/colorAccent</color>
+    <color name="bmc_seekbar_thumb_center">@color/white</color>
+    <color name="bmc_seekbar_thumb_outside">@android:color/transparent</color>
+    <color name="bmc_seekbar_buffered">@color/settings_item_bg_light</color>
+    <!--
+    Enable below line & CMD-click on black_semi_trans to see all available customization options
+    <color name="bmc_background">@color/black_semi_trans</color>
+    -->
+
+</resources>

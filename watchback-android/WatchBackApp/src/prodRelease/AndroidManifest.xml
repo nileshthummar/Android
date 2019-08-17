@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.watchback2.android">
+
+    <!-- We remove the networkSecurityConfig field for prod-release builds -->
+    <application
+        android:networkSecurityConfig="@xml/watchback_network_security_config"
+        tools:replace="android:networkSecurityConfig" />
+
+</manifest>

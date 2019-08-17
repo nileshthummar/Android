@@ -1,0 +1,192 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/app_background</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="settingsTextItemBackground">@color/settings_item_bg</item>
+        <item name="viewBackground">@color/app_background</item>
+        <item name="separator_color">@color/separator_color</item>
+        <item name="darkButtonBackground">@color/logout_button</item>
+        <item name="maskGradient">@drawable/brand_mask_gradient</item>
+        <item name="switchItemTextColor">@drawable/switch_item_text_color_selector</item>
+        <item name="switchOutline">@drawable/switch_outline</item>
+        <item name="switchSelectorLeft">@drawable/left_switch_item_background_selector</item>
+        <item name="switchSelectorRight">@drawable/right_switch_item_background_selector</item>
+        <item name="customTabIconTint">@drawable/tab_icon_tint</item>
+        <item name="viewBackgroundInverse">@color/app_background_light</item>
+        <item name="popupBackground">@drawable/popup_background_dark</item>
+    </style>
+
+    <!-- Base application theme (Light version). -->
+    <style name="AppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/app_background_light</item>
+        <item name="colorPrimaryDark">@color/app_background_light_darker</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/app_background_light</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="settingsTextItemBackground">@color/settings_item_bg_light</item>
+        <item name="viewBackground">@color/app_background_light</item>
+        <item name="separator_color">@color/separator_color_light</item>
+        <item name="darkButtonBackground">@color/logout_button_light</item>
+        <item name="maskGradient">@drawable/brand_mask_gradient_light</item>
+        <item name="switchItemTextColor">@drawable/switch_item_text_color_selector_light</item>
+        <item name="switchOutline">@drawable/switch_outline_light</item>
+        <item name="switchSelectorLeft">@drawable/left_switch_item_background_selector_light</item>
+        <item name="switchSelectorRight">@drawable/right_switch_item_background_selector_light</item>
+        <item name="customTabIconTint">@drawable/tab_icon_tint_light</item>
+        <item name="viewBackgroundInverse">@color/app_background</item>
+        <item name="popupBackground">@drawable/popup_background_light</item>
+    </style>
+
+    <style name="AppTheme.Fullscreen">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AppThemeLight.Fullscreen">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AppTheme.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
+    <style name="AppThemeLight.Transparent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AppSearchTheme" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/black_70_pc_opacity</item>
+        <item name="viewBackground">@color/app_background</item>
+    </style>
+
+    <style name="AppSearchThemeLight" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/app_background_light</item>
+        <item name="colorPrimaryDark">@color/app_background_light_darker</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/white_70_pc_opacity</item>
+        <item name="viewBackground">@color/app_background_light</item>
+    </style>
+
+    <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
+        <item name="android:textSize">16.3sp</item>
+        <item name="colorControlNormal">@color/steel</item>
+        <item name="colorControlActivated">@color/steel</item>
+        <item name="colorControlHighlight">@color/steel</item>
+        <item name="fontFamily">@font/sf_pro_text_regular</item>
+    </style>
+
+    <!--
+        TextAppearances for different Roboto fonts
+        ROBOTO fonts:
+        From android 4.x, the following Roboto font families are available:
+
+        android:fontFamily="sans-serif"           // roboto regular
+        android:fontFamily="sans-serif-light"     // roboto light
+        android:fontFamily="sans-serif-condensed" // roboto condensed
+        android:fontFamily="sans-serif-thin"      // roboto thin (android 4.2)
+        android:fontFamily="sans-serif-medium"    // roboto medium (android 5.0)
+        http://developer.android.com/reference/android/widget/TextView.html#attr_android:typeface
+
+        in combination with
+
+        android:textStyle="normal|bold|italic"
+
+        Preview differences here: https://alvinalexander.com/photos/android-roboto-fonts-examples
+     -->
+    <style name="TextAppearance_BrandonBold">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Set to use normal Roboto here as Roboto-medium i.e.
+    "sans-serif-medium" was added in Android 5.0 (API-v21) -->
+    <style name="TextAppearance_BrandonMedium">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    
+    <style name="RobotoRegular">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="RobotoLight">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <!-- Style for EditText views on Log-in / Sign-up screens -->
+    <style name="LoginSignupEditTextTheme">
+        <item name="colorControlNormal">@color/steel</item>
+        <item name="colorControlActivated">@color/steel</item>
+        <item name="colorControlHighlight">@color/steel</item>
+        <item name="android:paddingTop">9dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingBottom">16.5dp</item>
+    </style>
+
+    <style name="LoginSignupEditTextSpinnerTheme" parent="LoginSignupEditTextTheme" />
+
+    <style name="AppCompatAlertDialogStyle" parent="AppTheme">
+        <item name="android:textColorPrimary">?android:attr/textColor</item>
+        <item name="android:background">?attr/viewBackground</item>
+    </style>
+
+    <style name="AppCompatAlertDialogStyleLight" parent="AppThemeLight">
+        <item name="android:textColorPrimary">?android:attr/textColor</item>
+        <item name="android:background">?attr/viewBackground</item>
+    </style>
+
+    <!-- Style for TextViews on Settings screen -->
+    <style name="SettingsTextViewTheme">
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingLeft">17dp</item>
+        <item name="android:paddingRight">17dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAppearance">@style/TextAppearance_BrandonMedium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:drawablePadding">15dp</item>
+        <item name="android:background">?attr/settingsTextItemBackground</item>
+    </style>
+
+    <style name="SettingsSpinnerTheme" parent="LoginSignupEditTextTheme">
+        <item name="android:paddingLeft">18dp</item>
+        <item name="android:paddingRight">11dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <!-- Present here only to prevent crashing on API-21 & below devices (as they do not support
+    letter-spacing & hence the attribute needs to be put only for device API-21 & above) -->
+    <style name="WideLetterSpacing_0_08" />
+    <style name="WideLetterSpacing_0_01" />
+    <style name="WideLetterSpacing_0_15" />
+
+</resources>

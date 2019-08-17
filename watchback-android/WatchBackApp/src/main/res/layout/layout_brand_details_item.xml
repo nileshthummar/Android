@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="videoData"
+            type="com.watchback2.android.api.BrightcovePlaylistData.BrightcoveVideo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="185dp"
+            android:layout_margin="17dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{videoData.getFeaturedVideoPoster()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="5.7dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@{videoData.getName()}"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_carousel"
+            android:textSize="14sp"
+            app:fontFamily="@font/sf_pro_display_medium"
+            tools:fontFamily="@font/sf_pro_display_medium"
+            tools:text="Sister-Zoned - Foursome: Episode 1 blah blah...Second Line!... Sister-Zoned - Foursome: Episode 1 blah blah...Second Line!" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

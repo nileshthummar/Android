@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.watchback2.android.views.AccountRadioGroup
+        android:id="@+id/id_radio_group"
+        android:layout_width="260dp"
+        android:layout_height="34dp"
+        android:background="?attr/switchOutline"
+        android:orientation="horizontal"
+        >
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/id_usage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/your_usage"
+            android:textColor="?attr/switchItemTextColor"
+            android:textSize="11.5sp"
+            android:singleLine="true"
+            android:checked="false"
+            app:fontFamily="@font/sf_pro_text_bold"
+            tools:fontFamily="@font/sf_pro_txt_bld"
+            android:background="?attr/switchSelectorLeft"
+            />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/id_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/your_history"
+            android:textColor="?attr/switchItemTextColor"
+            android:textSize="11.5sp"
+            android:singleLine="true"
+            android:checked="true"
+            app:fontFamily="@font/sf_pro_text_bold"
+            tools:fontFamily="@font/sf_pro_txt_bld"
+            android:background="?attr/switchSelectorRight"
+            />
+
+    </com.watchback2.android.views.AccountRadioGroup>
+
+</layout>

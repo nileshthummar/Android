@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/id_genre_container_genrelist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="7.5dp"
+        android:paddingBottom="7.5dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_title_genre"
+            style="@style/WideLetterSpacing_0_08"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="13.5dp"
+            android:alpha=".8"
+            android:lineSpacingExtra="2sp"
+            android:singleLine="true"
+            android:text=""
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance_BrandonBold"
+            android:textSize="13sp"
+            tools:textSize="13sp"
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/id_list_genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_margins="@{@dimen/home_video_list_margin}"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</layout>

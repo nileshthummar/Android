@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2016 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:exo="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="Overdraw, InconsistentLayout"
+    android:id="@+id/brightcove_control_bar"
+    android:background="@color/bmc_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:orientation="horizontal"
+    android:layout_gravity="bottom"
+    style="@style/BrightcoveControlBar">
+
+    <LinearLayout
+        android:id="@+id/exo_controls_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_captions"
+            style="@style/BorderlessButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility="visible"
+            android:text="CC"/>
+
+
+
+        <ImageButton android:id="@id/exo_play"
+            style="@style/ExoMediaButton.Play"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageButton android:id="@id/exo_pause"
+            style="@style/ExoMediaButton.Pause"
+            android:layout_gravity="center_vertical"/>
+
+
+        <TextView android:id="@id/exo_position"
+            android:text="@string/time_placeholder"
+            android:padding="4dp"
+            android:textColor="@color/bmc_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility="visible"/>
+        <TextView
+            tools:ignore="InconsistentLayout"
+            android:id="@+id/exo_time_separator"
+            android:text="@string/time_separator"
+            android:padding="4dp"
+            android:textColor="@color/bmc_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility="visible"/>
+
+        <TextView android:id="@id/exo_duration"
+            android:text="@string/time_placeholder"
+            android:padding="4dp"
+            android:textColor="@color/bmc_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility="visible"/>
+
+        <FrameLayout
+            android:id="@+id/exo_seek_container"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:visibility="gone">
+
+            <com.google.android.exoplayer2.ui.DefaultTimeBar
+                android:id="@id/exo_progress"
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                exo:played_color="@color/colorAccent"
+                exo:buffered_color="@color/settings_item_bg_light"
+                />
+
+        </FrameLayout>
+
+        <View
+            android:id="@+id/exo_empty_spacer"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/exo_fullscreen_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_fullscreen_expand"
+            android:padding="4dp"/>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.SettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/id_settings_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/id_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:minHeight="?attr/actionBarSize"
+            android:onClick="@{viewModel::handleBackClick}"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/id_title"
+            app:layout_constraintBottom_toBottomOf="@+id/id_title"
+            app:srcCompat="@drawable/back_btn"
+            app:tint="?android:attr/textColor"
+            android:contentDescription="@null" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:singleLine="true"
+            android:text="@string/app_settings"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance_BrandonMedium"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <View
+            android:id="@+id/appbar_divider"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/ash_36"
+            app:layout_constraintTop_toBottomOf="@+id/id_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/id_scroller"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:layout_marginTop="5dp"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/id_settings_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="30dp"
+                android:paddingBottom="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/id_theme_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        app:fontFamily="@font/sf_pro_display_medium"
+                        tools:fontFamily="@font/sf_pro_display_medium"
+                        android:textSize="14sp"
+                        android:textAllCaps="true"
+                        android:drawablePadding="14dp"
+                        android:text="@string/theme"
+                        app:vectorDrawableLeft="@{viewModel.themeIconResourceId}"
+                        tools:drawableLeft="@drawable/ic_theme"
+                        />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/id_dark_theme_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onCheckedChanged="@{viewModel::handleThemeClick}"
+                        android:checked="@{viewModel.nightTheme}"
+                        tools:checked="true"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_my_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:theme="@style/SettingsTextViewTheme"
+                    android:text="@string/my_account"
+                    android:onClick="@{viewModel::handleMyAccountClick}"
+                    android:visibility="@{viewModel.isLoggedIn() ? View.VISIBLE : View.GONE}"
+                    app:vectorDrawableLeft="@{viewModel.facebookIconResourceId}"
+                    app:vectorDrawableRight="@{viewModel.carrotIconResourceId}"
+                    tools:drawableLeft="@drawable/ic_account_icon"
+                    tools:drawableRight="@drawable/ic_carrot_settings"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_share"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:theme="@style/SettingsTextViewTheme"
+                    android:text="@string/share_watchback"
+                    android:onClick="@{viewModel::handleShareClick}"
+                    app:vectorDrawableLeft="@{viewModel.shareIconResourceId}"
+                    app:vectorDrawableRight="@{viewModel.carrotIconResourceId}"
+                    tools:drawableLeft="@drawable/ic_share"
+                    tools:drawableRight="@drawable/ic_carrot_settings"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_rate_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:theme="@style/SettingsTextViewTheme"
+                    android:text="@string/rate_us"
+                    android:onClick="@{viewModel::handleRateUsClick}"
+                    app:vectorDrawableLeft="@{viewModel.rateIconResourceId}"
+                    app:vectorDrawableRight="@{viewModel.carrotIconResourceId}"
+                    tools:drawableLeft="@drawable/ic_rate_icon"
+                    tools:drawableRight="@drawable/ic_carrot_settings"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="9dp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_support"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:theme="@style/SettingsTextViewTheme"
+                    android:text="@string/support_center"
+                    android:onClick="@{viewModel::handleSupportClick}"
+                    app:vectorDrawableRight="@{viewModel.carrotIconResourceId}"
+                    tools:drawableRight="@drawable/ic_carrot_settings"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_tnc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:theme="@style/SettingsTextViewTheme"
+                    android:text="@string/terms_and_conditions"
+                    android:onClick="@{viewModel::handleTermsClick}"
+                    app:vectorDrawableRight="@{viewModel.carrotIconResourceId}"
+                    tools:drawableRight="@drawable/ic_carrot_settings"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_privacy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:theme="@style/SettingsTextViewTheme"
+                    android:text="@string/privacy_policy"
+                    android:onClick="@{viewModel::handlePrivacyClick}"
+                    app:vectorDrawableRight="@{viewModel.carrotIconResourceId}"
+                    tools:drawableRight="@drawable/ic_carrot_settings"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_vppa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:theme="@style/SettingsTextViewTheme"
+                    android:text="@string/vppa"
+                    android:onClick="@{viewModel::handleVppaClick}"
+                    app:vectorDrawableRight="@{viewModel.carrotIconResourceId}"
+                    tools:drawableRight="@drawable/ic_carrot_settings"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_about_nielsen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:theme="@style/SettingsTextViewTheme"
+                    tools:fontFamily="@font/brandon_medium"
+                    android:text="@string/about_nielsen_measurement"
+                    android:onClick="@{viewModel::handleAboutNielsenClick}"
+                    app:vectorDrawableRight="@{viewModel.carrotIconResourceId}"
+                    tools:drawableRight="@drawable/ic_carrot_settings"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/id_log_out"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:padding="12dp"
+                    android:text="@string/log_out"
+                    android:textAllCaps="true"
+                    android:textSize="14sp"
+                    android:onClick="@{viewModel::handleLogOutClick}"
+                    android:background="@drawable/rounded_corner"
+                    android:visibility="@{viewModel.isLoggedIn() ? View.VISIBLE : View.GONE}"
+                    app:backgroundTint="?attr/darkButtonBackground"
+                    tools:backgroundTint="?attr/darkButtonBackground"
+                    app:fontFamily="@font/sf_pro_text_bold"
+                    tools:fontFamily="@font/sf_pro_text_bold"
+                    tools:visibility="visible"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/id_copyright"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/steel"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="21dp"
+                    android:text="@{viewModel.appVersion}"
+                    app:fontFamily="@font/sf_pro_text_regular"
+                    tools:fontFamily="@font/sf_pro_text_regular"
+                    tools:text="Copyright Watchback 2018\nVersion 1.0.1"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

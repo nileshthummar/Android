@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.SignupViewModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/mobile_number_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/id_back_signup_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:minHeight="?attr/actionBarSize"
+                android:onClick="@{viewModel::handleBackClick}"
+                android:padding="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/id_title_phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/id_title_phone"
+                app:srcCompat="@drawable/back_btn"
+                app:tint="?android:attr/textColor" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/id_title_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:lineSpacingExtra="3.9sp"
+                android:minHeight="?attr/actionBarSize"
+                android:singleLine="true"
+                android:text="@string/enter_mobile_number"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="17.3sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/id_tv_phone_us"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="60dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/us_1"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="22sp"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/id_et_phone_no"
+                app:layout_constraintTop_toBottomOf="@+id/id_title_phone" />
+
+            <EditText
+                android:id="@+id/id_et_phone_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="24dp"
+                android:background="@null"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
+                android:onTextChanged="@{viewModel::handleMobileNumberTextChanged}"
+                android:paddingStart="10dp"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@+id/id_tv_phone_us"
+                app:layout_constraintLeft_toRightOf="@+id/id_tv_phone_us"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="2816561474" />
+
+            <View
+                android:id="@+id/id_v_underline1"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="14dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/id_tv_phone_us"
+                app:layout_constraintStart_toStartOf="@+id/id_tv_phone_us"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_phone_us" />
+
+            <View
+                android:id="@+id/id_v_underline2"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="14dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/id_et_phone_no"
+                app:layout_constraintStart_toStartOf="@+id/id_et_phone_no"
+                app:layout_constraintTop_toBottomOf="@+id/id_et_phone_no" />
+
+            <TextView
+                android:id="@+id/id_tv_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:alpha=".5"
+                android:gravity="start"
+                android:paddingStart="46dp"
+                android:paddingEnd="46dp"
+                android:text="@string/phone_verify_txt"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="13sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_v_underline2" />
+
+            <Button
+                android:id="@+id/id_btn_continue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="47dp"
+                android:layout_marginEnd="16dp"
+                android:alpha="@{viewModel.continueButtonOpacity}"
+                android:background="@drawable/rounded_bg"
+                android:clickable="@{viewModel.continueBtnClickable}"
+                android:onClick="@{viewModel.handleContinueClick}"
+                android:text="@string/continue_btn"
+                android:textAppearance="@style/TextAppearance_BrandonBold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:backgroundTint="@color/colorAccent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_tv_des" />
+
+            <TextView
+                android:id="@+id/id_tv_tnc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="39dp"
+                android:alpha=".5"
+                android:gravity="center"
+                android:text="@string/rates_may_apply"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="13sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_btn_continue" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

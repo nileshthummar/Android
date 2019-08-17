@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="channelData"
+            type="com.watchback2.android.models.Channel" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/id_channel_item_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="3dp">
+        
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/id_channel_logo"
+            android:layout_width="87dp"
+            android:layout_height="87dp"
+            app:channelRoundImageUrl="@{channelData.logoImageUrl}"
+            tools:src="@drawable/com_facebook_profile_picture_blank_portrait"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:gravity="center_horizontal|top"
+            android:maxLines="2"
+            android:minLines="2"
+            android:text="@{channelData.name}"
+            android:textSize="14sp"
+            app:fontFamily="@font/sf_pro_display_medium"
+            tools:fontFamily="@font/sf_pro_display_medium"
+            tools:text="Ipsum dolor sit cons ctetuia " />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

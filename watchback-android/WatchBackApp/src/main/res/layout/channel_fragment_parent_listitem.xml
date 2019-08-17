@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.watchback2.android.viewmodels.ChannelsFragmentViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Rest of the genres and thier channels-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/id_genre_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="7.5dp"
+            android:paddingBottom="7.5dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/id_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="@{viewModel.genreListVisibility}"
+                app:layout_margins="@{@dimen/home_video_list_margin}"
+                tools:visibility="visible" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/id_progress_bar_shimmer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{viewModel.shimmerVisibility}"
+                app:shimmer_base_alpha_dayMode="@{@fraction/opacity_37_5}"
+                app:shimmer_base_alpha_nightMode="@{@fraction/opacity_60}"
+                tools:visibility="visible">
+
+                <include layout="@layout/home_fragment_loading_view_row" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </LinearLayout>
+
+</layout>

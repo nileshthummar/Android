@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.watchback2.android.utils.AppUtility" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="videoData"
+            type="com.watchback2.android.api.BrightcovePlaylistData.BrightcoveVideo" />
+
+        <variable
+            name="playingNow"
+            type="boolean" />
+
+        <variable
+            name="willPlayNext"
+            type="boolean" />
+
+        <variable
+            name="isForChannelsList"
+            type="boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/id_video_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="9dp"
+        android:paddingBottom="9dp"
+        >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/id_image"
+            android:layout_width="135dp"
+            android:layout_height="76dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:imageUrl="@{videoData.getVideoPoster()}"
+            app:riv_corner_radius="2.9dp"
+            tools:src="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_watched"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/id_image"
+            app:layout_constraintRight_toRightOf="@id/id_image"
+            android:layout_margin="7dp"
+            android:background="@drawable/rounded_bg"
+            android:gravity="center"
+            android:maxLines="1"
+            android:includeFontPadding="false"
+            android:paddingBottom="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:textSize="10sp"
+            android:text="@string/watched"
+            android:visibility="gone"
+            app:textAllCaps="true"
+            app:fontFamily="@font/sf_pro_text_medium"
+            app:backgroundTint="?attr/colorPrimaryDark"
+            tools:backgroundTint="?attr/colorPrimaryDark"
+            tools:fontFamily="@font/sf_pro_text_medium"
+            tools:visibility="visible"
+            tools:ignore="SmallSp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_playing_now"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintTop_toTopOf="@id/id_image"
+            app:layout_constraintBottom_toBottomOf="@id/id_image"
+            app:layout_constraintLeft_toLeftOf="@id/id_image"
+            app:layout_constraintRight_toRightOf="@id/id_image"
+            android:background="@color/dark_70"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:text="@{willPlayNext ? @string/play_next : @string/playing_now}"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:visibility="@{(playingNow || willPlayNext) ? View.VISIBLE : View.GONE}"
+            android:textAppearance="@style/RobotoLight"
+            tools:text="@string/play_next"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/id_image"
+            app:layout_constraintRight_toRightOf="@id/id_image"
+            android:layout_margin="7dp"
+            android:background="@drawable/rounded_bg"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingBottom="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:textSize="10sp"
+            android:visibility="@{((safeUnbox(videoData.getDuration()) > 0) &amp;&amp; !playingNow) ? View.VISIBLE : View.GONE, default=gone}"
+            app:fontFamily="@font/sf_pro_text_medium"
+            app:videoDuration="@{safeUnbox(videoData.getDuration())}"
+            app:backgroundTint="?attr/colorPrimaryDark"
+            tools:backgroundTint="?attr/colorPrimaryDark"
+            tools:fontFamily="@font/sf_pro_text_medium"
+            tools:text="21:08"
+            tools:visibility="visible"
+            tools:ignore="SmallSp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/id_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/id_channel_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:text="@{videoData.getName()}"
+            android:textSize="14sp"
+            android:textAppearance="@style/RobotoLight"
+            tools:text="Amet elit ipsum dolor sit amet elitlit ipsum dolor amet Amet elit ipsum dolor sit amet "
+            tools:ignore="RtlHardcoded" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_channel_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1.2dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="@id/id_name"
+            app:layout_constraintTop_toBottomOf="@id/id_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:ellipsize="end"
+            android:gravity="start|top"
+            android:singleLine="true"
+            android:text="@{videoData.getCustomFields().getProvider()}"
+            android:textColor="@color/steel"
+            android:visibility="@{(isForChannelsList || (videoData.getCustomFields() == null) || TextUtils.isEmpty(videoData.getCustomFields().getProvider())) ? View.GONE : View.VISIBLE}"
+            android:textSize="12sp"
+            app:fontFamily="@font/sf_pro_display_regular"
+            tools:fontFamily="@font/sf_pro_display_regular"
+            tools:text="Ipsum dolor sit consctetuia blah blah2"
+            tools:ignore="SmallSp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

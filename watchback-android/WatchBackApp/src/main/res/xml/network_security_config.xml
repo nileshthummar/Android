@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+
+    <!-- Enable SSL Proxy for debug mode only -->
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+
+    <!-- Allow HTTP for specific domains, -allow certain domains to be permitted to use clear HTTP requests:
+     https://support.brightcove.com/android-pie-support-native-sdk-android#HTTP_for_specific_domains -->
+    <base-config cleartextTrafficPermitted="true" />
+
+</network-security-config>

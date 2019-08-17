@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/id_iv_channel_icon"
+            android:layout_width="94.8dp"
+            android:layout_height="54.65dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="2.9dp" />
+
+        <TextView
+            android:id="@+id/id_tv_channel_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textAppearance="@style/TextAppearance_BrandonMedium"
+            app:layout_constraintLeft_toLeftOf="@+id/id_iv_channel_icon"
+            app:layout_constraintRight_toRightOf="@+id/id_iv_channel_icon"
+            app:layout_constraintTop_toBottomOf="@+id/id_iv_channel_icon"
+            tools:text="channel name" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

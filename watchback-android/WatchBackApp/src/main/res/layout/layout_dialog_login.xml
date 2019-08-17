@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ic_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="@string/close_video_description_screen"
+            app:srcCompat="@drawable/ic_close_round" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:background="?attr/popupBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="36dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginRight="36dp"
+                android:layout_marginBottom="19dp"
+                android:gravity="center"
+                android:text="@string/you_must_be_registered_to_do_this"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="16sp"
+                tools:text="@string/you_must_be_registered_to_do_this" />
+
+            <Button
+                android:id="@+id/id_btn_signup"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="17dp"
+                android:background="@drawable/rounded_bg"
+                android:contentDescription="@string/sign_up"
+                android:gravity="center"
+                android:text="@string/sign_up"
+                android:textAppearance="@style/TextAppearance_BrandonBold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:backgroundTint="@color/colorAccent"
+                tools:text="@string/sign_up" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"
+                android:alpha=".5"
+                android:gravity="center"
+                android:text="@string/login_intro"
+                android:textAppearance="@style/TextAppearance_BrandonMedium"
+                android:textSize="13sp"
+                tools:text="@string/login_intro" />
+
+            <TextView
+                android:id="@+id/id_tv_login"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/log_in"
+                android:textAppearance="@style/TextAppearance_BrandonBold"
+                android:textSize="16sp"
+                tools:text="@string/log_in" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/id_tv_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:alpha=".5"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="@string/close"
+            android:textAppearance="@style/TextAppearance_BrandonMedium"
+            android:textSize="13sp"
+            tools:text="@string/close" />
+
+    </LinearLayout>
+</layout>

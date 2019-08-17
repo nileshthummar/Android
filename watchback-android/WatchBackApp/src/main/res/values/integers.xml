@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="null_drawable_resource">-1</integer>
+
+    <!-- Bottom tab item indices -->
+    <integer name="home">0</integer>
+    <integer name="channels">1</integer>
+    <integer name="sweeps">2</integer>
+    <integer name="settings">3</integer>
+
+    <integer name="max_lines_2">2</integer>
+    <integer name="max_lines_3">3</integer>
+
+</resources>

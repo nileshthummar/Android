@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "645651075327",
+    "firebase_url": "https://watchback-8846c.firebaseio.com",
+    "project_id": "watchback-8846c",
+    "storage_bucket": "watchback-8846c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645651075327:android:b6d9422e2bba4388",
+        "android_client_info": {
+          "package_name": "com.watchback2.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645651075327-o935j467mecv8jj1h50nv3csp9ap5sto.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "645651075327-o935j467mecv8jj1h50nv3csp9ap5sto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcoVD3wiC5XlZ2jz7X2g2nTAcjTGuMzwY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
